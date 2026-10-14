@@ -6,13 +6,13 @@ typedef struct{
     float right_padding_proportion;
     float top_padding_proportion;   
     float bottom_padding_proportion; 
-} Proportions;
+} Canvas;
 
 typedef struct{
     float width;
     float height;
     char *title;
-    Proportions proportions;
+    Canvas proportions;
 } Context;
 
 #endif
