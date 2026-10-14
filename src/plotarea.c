@@ -4,12 +4,10 @@ PlotArea create_plotarea(Context *context)
 {
     PlotArea area;
 
-    // Numerops altearoiso que eu escolhi, mas depois precisam mudar de acordo com o tamanho das dimensoes
-    // do context
-    area.padding_left = 80;
-    area.padding_right = 40;
-    area.padding_top = 40;
-    area.padding_bottom = 60;
+    area.padding_left = context->width * context->proportions.left_padding_proportion;
+    area.padding_right = context->width * context->proportions.right_padding_proportion;
+    area.padding_top = context->height * context->proportions.top_padding_proportion;
+    area.padding_bottom = context->height * context->proportions.bottom_padding_proportion;
 
     area.left = area.padding_left;
     area.top = area.padding_top;

@@ -1,12 +1,13 @@
-
 #include "raylib.h"
 #include "plane.h"
 #include "data.h"
 #include "plotarea.h"
 #include "stdio.h"
+
 int main(void)
 {
-    Context window = {800.0, 800.0, "Teste"};
+    Proportions default_proportions = {0.10f, 0.05f, 0.05f, 0.10f};
+    Context window = {800.0, 800.0, "Teste", default_proportions};
 
     Plane plano = {
         SCATTER,
