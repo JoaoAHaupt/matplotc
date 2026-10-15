@@ -10,10 +10,11 @@ compilar
 context - Informacoes sobre a janela
 plotarea - informacoes sobre a area em que o grafico sera inserida (queria deixar essa classe sem ser vista pelo usuario final, mas seila)
 plane - plano cartesiano
-data - os dados (nao sei se gostei muito com eles estao estruturados, talvez seja bom mudar)
-
+data - estruturacao dos dados (nao sei se gostei muito com eles estao estruturados, talvez seja bom mudar)
+plotgraphs - desenho dos graficos em si (eu criei mas pode ser reorganizado igual tava antes tbm, o que o sr windows dono do repositorio preferir)
 
 Coisas futuras:
+  arrumar os dados urgente!!!
   acabar todos os graficos  
   poder fazer graficos com um .txt como entrada
   poder gerar uma imagem do grafico (nao sei se isso eh possivel)

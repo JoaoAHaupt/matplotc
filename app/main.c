@@ -3,6 +3,7 @@
 #include "data.h"
 #include "plotarea.h"
 #include "stdio.h"
+#include "plotgraphs.h"
 
 int main(void)
 {
@@ -33,7 +34,7 @@ int main(void)
         ClearBackground(RAYWHITE);
 
         draw_plane(&window, &plano, &plot);
-        draw_data(&data, &plano, &plot);
+        plot_scatter_graph(&data, &plano, &plot);
 
         EndDrawing();
     }
