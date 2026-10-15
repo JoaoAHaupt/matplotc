@@ -15,7 +15,6 @@ data - estruturacao dos dados (nao sei se gostei muito com eles estao estruturad
 plotgraphs - desenho dos graficos em si (eu criei mas pode ser reorganizado igual tava antes tbm, o que o sr windows dono do repositorio preferir)
 
 Coisas futuras:
-  arrumar os dados urgente!!!
   acabar todos os graficos  
   poder fazer graficos com um .txt como entrada
   poder gerar uma imagem do grafico (nao sei se isso eh possivel)

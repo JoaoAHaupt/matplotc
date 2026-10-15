@@ -1,11 +1,7 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include "plane.h"
-
 typedef struct {
-    Plane plane; // isso ta sendo usado em algum momento? 
-    // pq todas as funcoes que usam Data e StructuredData ja pegam o plane como argumento
     char *label;
     int *x;
     int *y;
@@ -19,14 +15,13 @@ typedef struct {
 } Range;
 
 typedef struct {
-    Plane plane;
     char *label;
     Range *intervals;
     int size; // tamanho de cada intervalo
     int num; // quantidade de intervalos
 } Structured_Data;
 
-Structured_Data set_intervals_n(Data *data, int num);
-Structured_Data set_intervals_s(Data *data, int size);
+Structured_Data create_num_intervals(Data *data, int num);
+Structured_Data create_intervals_of_size(Data *data, int size);
 
 #endif

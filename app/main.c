@@ -23,7 +23,7 @@ int main(void)
 
     int size = sizeof(x) / sizeof(x[0]);
 
-    Data data = {plano, "pontos", x, y, size};
+    Data data = {"pontos", x, y, size};
     PlotArea plot = create_plotarea(&window);
     InitWindow(window.width, window.height, window.title);
     SetTargetFPS(60);
