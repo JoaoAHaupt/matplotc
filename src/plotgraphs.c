@@ -28,39 +28,6 @@ void plot_scatter_graph(Data *data, Plane *plane, PlotArea *plot, Color color)
 }
 
 // pra documentacao: int filled deve ser preenchido com 0 se false e 1 se true
-void plot_bar_graph_num(Structured_Data *struct_data, Plane *plane, PlotArea *plot, int filled, Color color)
-{
-    float y_range = plane->y_min_max[1] - plane->y_min_max[0];
-    int size = struct_data->size;
-    float bar_width = plot->width / size;
-
-    for (int i = 0; i < size; i++) {
-        Range intervalo = struct_data->intervals[i]; 
-        int coordinates[2] = {intervalo.first_value[0], intervalo.first_value[1]};
-
-        float bar_x = plot->left + i * bar_width;
-        float bar_y = plot->bottom -
-                (coordinates[1] - plane->y_min_max[0]) /
-                y_range * plot->height;
-        float bar_height = plot->bottom - bar_y;
-
-        if (filled) {
-            DrawRectangle((int)bar_x, 
-                          (int)bar_y,
-                          (int)bar_width,
-                          (int)bar_height,
-                          color);
-        }
-        else {
-            DrawRectangleLines((int)bar_x, 
-                            (int)bar_y,
-                            (int)bar_width,
-                            (int)bar_height,
-                            color);
-        }
-    }
-}
-
 void plot_bar_graph(Data *data, Plane *plane, PlotArea *plot, int filled, Color color)
 {
     float y_range = plane->y_min_max[1] - plane->y_min_max[0];
@@ -91,6 +58,39 @@ void plot_bar_graph(Data *data, Plane *plane, PlotArea *plot, int filled, Color 
                             color);
         }
 
+    }
+}
+
+void plot_bar_graph_intervals(Structured_Data *struct_data, Plane *plane, PlotArea *plot, int filled, Color color)
+{
+    float y_range = plane->y_min_max[1] - plane->y_min_max[0];
+    int size = struct_data->size;
+    float bar_width = plot->width / size;
+
+    for (int i = 0; i < size; i++) {
+        Range intervalo = struct_data->intervals[i]; 
+        int coordinates[2] = {intervalo.first_value[0], intervalo.first_value[1]};
+
+        float bar_x = plot->left + i * bar_width;
+        float bar_y = plot->bottom -
+                (coordinates[1] - plane->y_min_max[0]) /
+                y_range * plot->height;
+        float bar_height = plot->bottom - bar_y;
+
+        if (filled) {
+            DrawRectangle((int)bar_x, 
+                          (int)bar_y,
+                          (int)bar_width,
+                          (int)bar_height,
+                          color);
+        }
+        else {
+            DrawRectangleLines((int)bar_x, 
+                            (int)bar_y,
+                            (int)bar_width,
+                            (int)bar_height,
+                            color);
+        }
     }
 }
 
