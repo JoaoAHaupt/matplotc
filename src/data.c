@@ -1,29 +1,47 @@
 #include "plane.h"
 #include "data.h"
 #include "plotarea.h"
-#include "raylib.h"
 #include "stdio.h"
 
-void draw_data(Data *data, Plane *plane, PlotArea *plot)
-{
-    float x_range = plane->x_min_max[1] - plane->x_min_max[0];
-    float y_range = plane->y_min_max[1] - plane->y_min_max[0];
+Structured_Data set_intervals_q(Data *data, int quantity){
+    Structured_Data s_data;
+    s_data.size = quantity;
+    int int_size = data->size / quantity;
 
-
-        for (int i = 0; i < data->size; i++) {
-            printf("AAAAAAAAAAAAAAAAAAAAA");
-            float point_x = plot->left +
-                (data->x[i] - plane->x_min_max[0]) /
-                x_range * plot->width;
-
-            float point_y = plot->bottom -
-                (data->y[i] - plane->y_min_max[0]) /
-                y_range * plot->height;
-
-            DrawCircle((int)point_x, (int)point_y, 5, RED);
-
+    for (int i = 0; i < s_data.size; i++) {
+        // s_data.intervals[i]->label = i*tamanho + "-" + (i+1)*tamanho-1;
+        s_data.intervals[i].first_value = {i*tamanho, YDOX}; // YDOX: preciso saber como os dados vao estar
+                                                             // organizados pra saber como acessar o valor de y de um certo x
+        s_data.intervals[i].width = int_size;
+        s_data.intervals[i].height = 0;
     }
+    for (int i = 0; i < s_data.size; i++) {
+        first = s_data.intervals[i].first_value[0];
+        for (int d = first; d < first+tamanho; d++) {
+            s_data.intervals[i].height += YDOX;
+        }
+    }
+    return s_data;
 }
 
+// pra documentacao: limitado pq todos os intervalos precisam ter o mesmo tamanho
+// pressupoe que seja possivel, ou seja, que int_size seja menor ou igual a data->size
+// e que int_size divida data->size
+Structured_Data set_intervals_s(Data *data, int int_size){
+    Structured_Data s_data;
+    s_data.size = data->size / int_size;
 
-void draw_label(Data *data, Plane *plane){}
+    for (int i = 0; i < s_data.size; i++) {
+        // s_data.intervals[i]->label = i*tamanho + "-" + (i+1)*tamanho-1;
+        s_data.intervals[i].first_value = {i*tamanho, YDOX};
+        s_data.intervals[i].width = int_size;
+        s_data.intervals[i].height = 0;
+    }
+    for (int i = 0; i < s_data.size; i++) {
+        first = s_data.intervals[i].first_value[0];
+        for (int d = first; d < first+tamanho; d++) {
+            s_data.intervals[i].height += YDOX;
+        }
+    }
+    return s_data;
+}
