@@ -12,13 +12,13 @@ Structured_Data set_intervals_n(Data *data, int num){
     s_data.size = data->size / num;
 
     for (int i = 0; i < num; i++) {
-        // s_data.intervals[i]->label = i*tamanho + "-" + (i+1)*tamanho-1;
-        s_data.intervals[i].first_value = {i*tamanho, YDOX}; 
+        // s_data.intervals[i]->label = i*s_data.size + "-" + (i+1)*s_data.size-1;
+        s_data.intervals[i].first_value = {i*s_data.size, YDOX}; 
         s_data.intervals[i].height = 0;
     }
     for (int i = 0; i < num; i++) {
         first = s_data.intervals[i].first_value[0];
-        for (int d = first; d < first+tamanho; d++) {
+        for (int d = first; d < first+s_data.size; d++) {
             s_data.intervals[i].height += YDOX;
         }
     }
@@ -34,13 +34,13 @@ Structured_Data set_intervals_s(Data *data, int size){
     s_data.num = data->size / size;
 
     for (int i = 0; i < s_data.num; i++) {
-        // s_data.intervals[i]->label = i*tamanho + "-" + (i+1)*tamanho-1;
-        s_data.intervals[i].first_value = {i*tamanho, YDOX};
+        // s_data.intervals[i]->label = i*size + "-" + (i+1)*size-1;
+        s_data.intervals[i].first_value = {i*size, YDOX};
         s_data.intervals[i].height = 0;
     }
     for (int i = 0; i < s_data.num; i++) {
         first = s_data.intervals[i].first_value[0];
-        for (int d = first; d < first+tamanho; d++) {
+        for (int d = first; d < first+size; d++) {
             s_data.intervals[i].height += YDOX;
         }
     }
