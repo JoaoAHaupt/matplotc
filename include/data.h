@@ -22,11 +22,11 @@ typedef struct {
     Plane plane;
     char *label;
     Range *intervals;
-    int width;
-    int size;
+    int size; // tamanho de cada intervalo
+    int num; // quantidade de intervalos
 } Structured_Data;
 
-Structured_Data set_intervals_q(Data *data, int quantity);
+Structured_Data set_intervals_n(Data *data, int num);
 Structured_Data set_intervals_s(Data *data, int size);
 
 #endif
