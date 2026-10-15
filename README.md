@@ -7,6 +7,7 @@ compilar
           -I../include -o grafico \
           -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 ❯ gcc app/main.c src/plane.c src/data.c src/plotarea.c src/plotgraphs.c -Iinclude -o grafico -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 
+❯ gcc app/bar.c src/plane.c src/data.c src/plotarea.c src/plotgraphs.c -Iinclude -o grafico -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 
 
 context - Informacoes sobre a janela
 plotarea - informacoes sobre a area em que o grafico sera inserida (queria deixar essa classe sem ser vista pelo usuario final, mas seila)
