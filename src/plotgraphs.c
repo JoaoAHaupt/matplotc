@@ -49,15 +49,20 @@ void plot_bar_graph(Data *data, Plane *plane, PlotArea *plot, int filled, Color 
                           (int)bar_width,
                           (int)bar_height,
                           color);
+            DrawRectangleLines((int)bar_x, 
+                               (int)bar_y,
+                               (int)bar_width,
+                               (int)bar_height,
+                               BLACK);
         }
         else {
             DrawRectangleLines((int)bar_x, 
-                            (int)bar_y,
-                            (int)bar_width,
-                            (int)bar_height,
-                            color);
+                               (int)bar_y,
+                               (int)bar_width,
+                               (int)bar_height,
+                               color);
         }
-
+        printf(".");
     }
 }
 
@@ -83,14 +88,20 @@ void plot_bar_graph_intervals(Structured_Data *struct_data, Plane *plane, PlotAr
                           (int)bar_width,
                           (int)bar_height,
                           color);
+            DrawRectangleLines((int)bar_x, 
+                               (int)bar_y,
+                               (int)bar_width,
+                               (int)bar_height,
+                               BLACK);
         }
         else {
             DrawRectangleLines((int)bar_x, 
-                            (int)bar_y,
-                            (int)bar_width,
-                            (int)bar_height,
-                            color);
+                               (int)bar_y,
+                               (int)bar_width,
+                               (int)bar_height,
+                               color);
         }
+        printf(".");
     }
 }
 
