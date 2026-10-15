@@ -35,7 +35,7 @@ void plot_bar_graph_num(Structured_Data *struct_data, Plane *plane, PlotArea *pl
 
     for (int i = 0; i < size; i++) {
         Range intervalo = struct_data->intervals[i]; 
-        int coordinates = {intervalo->first_value[0], intervalo->first_value[1]};
+        int coordinates[2] = {intervalo.first_value[0], intervalo.first_value[1]};
 
         float bar_x = plot->left + i * bar_width;
         float bar_y = plot->bottom -
@@ -67,7 +67,7 @@ void plot_bar_graph(Data *data, Plane *plane, PlotArea *plot, int filled, Color 
     float bar_width = plot->width / size;
 
     for (int i = 0; i < size; i++) {
-        int coordinates = {data->x[i], data->y[i]};
+        int coordinates[2] = {data->x[i], data->y[i]};
 
         float bar_x = plot->left + i * bar_width;
         float bar_y = plot->bottom -

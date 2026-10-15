@@ -13,11 +13,12 @@ Structured_Data set_intervals_n(Data *data, int num){
 
     for (int i = 0; i < num; i++) {
         // s_data.intervals[i]->label = i*s_data.size + "-" + (i+1)*s_data.size-1;
-        s_data.intervals[i].first_value = {i*s_data.size, YDOX}; 
+        s_data.intervals[i].first_value[0] = i*s_data.size; 
+        s_data.intervals[i].first_value[1] = YDOX; 
         s_data.intervals[i].height = 0;
     }
     for (int i = 0; i < num; i++) {
-        first = s_data.intervals[i].first_value[0];
+        int first = s_data.intervals[i].first_value[0];
         for (int d = first; d < first+s_data.size; d++) {
             s_data.intervals[i].height += YDOX;
         }
@@ -35,11 +36,12 @@ Structured_Data set_intervals_s(Data *data, int size){
 
     for (int i = 0; i < s_data.num; i++) {
         // s_data.intervals[i]->label = i*size + "-" + (i+1)*size-1;
-        s_data.intervals[i].first_value = {i*size, YDOX};
+        s_data.intervals[i].first_value[0] = i*size; 
+        s_data.intervals[i].first_value[1] = YDOX; 
         s_data.intervals[i].height = 0;
     }
     for (int i = 0; i < s_data.num; i++) {
-        first = s_data.intervals[i].first_value[0];
+        int first = s_data.intervals[i].first_value[0];
         for (int d = first; d < first+size; d++) {
             s_data.intervals[i].height += YDOX;
         }
