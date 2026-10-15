@@ -34,7 +34,7 @@ int main(void)
         ClearBackground(RAYWHITE);
 
         draw_plane(&window, &plano, &plot);
-        plot_scatter_graph(&data, &plano, &plot);
+        plot_scatter_graph(&data, &plano, &plot, RED);
 
         EndDrawing();
     }

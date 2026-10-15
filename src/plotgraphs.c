@@ -5,7 +5,7 @@
 #include "data.h"
 #include "plotgraphs.h"
 
-void plot_scatter_graph(Data *data, Plane *plane, PlotArea *plot)
+void plot_scatter_graph(Data *data, Plane *plane, PlotArea *plot, Color color)
 {
     float x_range = plane->x_min_max[1] - plane->x_min_max[0];
     float y_range = plane->y_min_max[1] - plane->y_min_max[0];
@@ -21,16 +21,80 @@ void plot_scatter_graph(Data *data, Plane *plane, PlotArea *plot)
                 (data->y[i] - plane->y_min_max[0]) /
                 y_range * plot->height;
 
-            DrawCircle((int)point_x, (int)point_y, 5, RED);
+            DrawCircle((int)point_x, (int)point_y, 5, color);
 
     }
 }
 
-// ainda no processo!!!
-void plot_bar_graph(Data *data, Plane *plane, int filled, int numerical, Color color) {
+// pra documentacao: int filled deve ser preenchido com 0 se false e 1 se true
+void plot_bar_graph_num(Structured_Data *struct_data, Plane *plane, PlotArea *plot, int filled, Color color)
+{
+    float y_range = plane->y_min_max[1] - plane->y_min_max[0];
+    int size = struct_data->size;
+    float bar_width = plot->width / size;
+
+    for (int i = 0; i < size; i++) {
+        Range intervalo = struct_data->intervals[i]; 
+        int coordinates = {intervalo->first_value[0], intervalo->first_value[1]};
+
+        float bar_x = plot->left + i * bar_width;
+        float bar_y = plot->bottom -
+                (coordinates[1] - plane->y_min_max[0]) /
+                y_range * plot->height;
+        float bar_height = plot->bottom - bar_y;
+
+        if (filled) {
+            DrawRectangle((int)bar_x, 
+                          (int)bar_y,
+                          (int)bar_width,
+                          (int)bar_height,
+                          color);
+        }
+        else {
+            DrawRectangleLines((int)bar_x, 
+                            (int)bar_y,
+                            (int)bar_width,
+                            (int)bar_height,
+                            color);
+        }
+    }
+}
+
+void plot_bar_graph(Data *data, Plane *plane, PlotArea *plot, int filled, Color color)
+{
+    float y_range = plane->y_min_max[1] - plane->y_min_max[0];
+    int size = data->size;
+    float bar_width = plot->width / size;
+
+    for (int i = 0; i < size; i++) {
+        int coordinates = {data->x[i], data->y[i]};
+
+        float bar_x = plot->left + i * bar_width;
+        float bar_y = plot->bottom -
+                (coordinates[1] - plane->y_min_max[0]) /
+                y_range * plot->height;
+        float bar_height = plot->bottom - bar_y;
+
+        if (filled) {
+            DrawRectangle((int)bar_x, 
+                          (int)bar_y,
+                          (int)bar_width,
+                          (int)bar_height,
+                          color);
+        }
+        else {
+            DrawRectangleLines((int)bar_x, 
+                            (int)bar_y,
+                            (int)bar_width,
+                            (int)bar_height,
+                            color);
+        }
+
+    }
 }
 
 void draw_labels(Data *data, Plane *plane){
-    if (plane->type == SCATTER) {} // dividir pelo tipo?
-    // da pra colocar os rotulos dentro de cada uma das funcoes plot tbm
+    if (plane->type == SCATTER) {} // dividir pelo tipo aqui dentro?
+    // ou fazer uma funcao draw label diferente pra cada tipo de grafico?
+    // ou ja colocar os rotulos dentro de cada funcao plot_graph?
 }
