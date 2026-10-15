@@ -4,7 +4,8 @@
 #include "plane.h"
 
 typedef struct {
-    Plane plane;
+    Plane plane; // isso ta sendo usado em algum momento? 
+    // pq todas as funcoes que usam Data e StructuredData ja pegam o plane como argumento
     char *label;
     int *x;
     int *y;
@@ -14,7 +15,6 @@ typedef struct {
 typedef struct {
     char *label;
     int first_value[2];
-    int width;
     int height;
 } Range;
 
@@ -22,6 +22,7 @@ typedef struct {
     Plane plane;
     char *label;
     Range *intervals;
+    int width;
     int size;
 } Structured_Data;
 
