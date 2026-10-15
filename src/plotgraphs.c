@@ -1,9 +1,10 @@
-#include "raylib.h"
 #include "context.h"
-#include "plotarea.h"
-#include "plane.h"
 #include "data.h"
+#include "plane.h"
+#include "plotarea.h"
 #include "plotgraphs.h"
+#include "raylib.h"
+#include "stdio.h"
 
 void plot_scatter_graph(Data *data, Plane *plane, PlotArea *plot, Color color)
 {

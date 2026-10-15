@@ -1,7 +1,6 @@
-#include "plane.h"
 #include "data.h"
+#include "plane.h"
 #include "plotarea.h"
-#include "stdio.h"
 
 int YDOX = 0; // YDOX: preciso saber como os dados vao estar
 // organizados pra saber como acessar o valor de y de um certo x
