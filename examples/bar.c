@@ -1,0 +1,52 @@
+#include "plotfjms.h"
+
+int main(void)
+{
+    Context window = {
+        1200.0, 800.0,
+        "Vendas Mensais - Comparacao entre Lojas"
+    };
+
+    Plane plano = {
+        BAR,
+        {1, 6}, 1,
+        {0, 2000}, 10,
+        false
+    };
+
+    // Vendas da Loja Centro (em milhares de reais)
+    int x1[] = {1990, 1991, 1992, 1993, 1994, 1995};
+    int y1[] = {45, 52, 48, 65, 72, 80};
+    int n1 = sizeof(x1) / sizeof(x1[0]);
+
+    Data data1 = {
+        plano,
+        "Loja Centro",
+        x1,
+        "Meses",
+        y1,
+        "Vendas (R$ mil)",
+        n1
+    };
+
+    int x2[] = {1, 2, 3, 4, 5, 6};
+    int y2[] = {60, 55, 70, 68, 85, 95};
+    int n2 = sizeof(x2) / sizeof(x2[0]);
+
+    Data data2 = {
+        plano,
+        "Loja Shopping",
+        x2,
+        "Meses",
+        y2,
+        "Vendas (R$ mil)",
+        n2
+    };
+
+    Data dados[] = {data1, data2};
+    int data_count = sizeof(dados) / sizeof(dados[0]);
+
+    create_graph(&window, &plano, dados, data_count);
+
+    return 0;
+}
