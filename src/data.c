@@ -19,7 +19,7 @@ int data_size(Data *data){
     return sizeof(data)/sizeof(data[0]);
 }
 
-void draw_data(Data *data, int data_count, Plane *plane, PlotArea *plot)
+void draw_scatter_data(Data *data, int data_count, Plane *plane, PlotArea *plot)
 {
     float x_range = plane->x_min_max[1] - plane->x_min_max[0];
     float y_range = plane->y_min_max[1] - plane->y_min_max[0];
@@ -92,6 +92,7 @@ void draw_label(Data *data, Plane *plane, PlotArea *plot)
         BLACK
     );
 }
+
 void draw_legend(Data *data, int data_count, PlotArea *plot)
 {
     Font font = GetFontDefault();
@@ -130,4 +131,9 @@ void draw_legend(Data *data, int data_count, PlotArea *plot)
             BLACK
         );
     }
+}
+
+void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot)
+{
+
 }
