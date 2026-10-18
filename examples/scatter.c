@@ -1,4 +1,5 @@
-#include "plotfjms.h"
+#include "matplotc.h"
+#include <stdbool.h>
 
 int main(void)
 {
@@ -58,7 +59,7 @@ int main(void)
     Data dados[] = {data1, data2, data3};
 
     int data_count = sizeof(dados) / sizeof(dados[0]);
-    plot_scatter(&window, &plano, dados, data_count);
+    plot_scatter(&window, &plano, dados, data_count, false);
 
     return 0;
 }

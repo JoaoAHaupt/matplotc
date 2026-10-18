@@ -1,11 +1,16 @@
-#include "plotfjms.h"
+#include "matplotc.h"
 
 int main(void)
 {
-    Context window = {
-        800.0, 800.0,
-        "PlotFJMS - Teste Grafico de Pizza"
-    };
+    Context window = create_context(
+        800.0,
+        800.0,
+        "PlotFJMS - Pie Chart Test"
+    );
+
+    if (window.width == 0) {
+        return 1;
+    }
 
     Plane plano = {
         {0, 4}, 1,
@@ -18,20 +23,24 @@ int main(void)
 
     int size1 = sizeof(y1) / sizeof(y1[0]);
 
-    Data data1 = {
+    Data data1 = create_data(
         plano,
-        "Linguagens",
+        "Languages",
         x1,
-        "Linguagem",
+        "Language",
         y1,
-        "Participacao (%)",
+        "Participation (%)",
         size1
-    };
+    );
 
-    Data dados[] = {data1};
-    int data_count = sizeof(dados) / sizeof(dados[0]);
+    if (data1.size == 0) {
+        return 1;
+    }
 
-    plot_pie(&window, &plano, dados, data_count);
+    Data data[] = {data1};
+    int data_count = sizeof(data) / sizeof(data[0]);
+
+    plot_pie(&window, &plano, data, data_count);
 
     return 0;
 }

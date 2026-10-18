@@ -1,4 +1,4 @@
-#include "plotfjms.h"
+#include "matplotc.h"
 
 int main(void)
 {
