@@ -16,7 +16,6 @@ typedef struct {
     int size;
 } Data;
 
-void draw_scatter_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
 void draw_line_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
 void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
 void draw_pie_data(Data *data, int data_count, Plane *plane, PlotArea *plot);

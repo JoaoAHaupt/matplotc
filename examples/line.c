@@ -8,7 +8,6 @@ int main(void)
     };
 
     Plane plano = {
-        LINE,
         {1990, 2025}, 5,
         {0, 220}, 20,
         true
@@ -60,7 +59,7 @@ int main(void)
 
     int data_count = sizeof(dados) / sizeof(dados[0]);
 
-    create_graph(&window, &plano, dados, data_count);
+    plot_line(&window, &plano, dados, data_count);
 
     return 0;
 }

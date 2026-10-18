@@ -5,15 +5,7 @@
 #include "context.h"
 #include "plotarea.h"
 
-enum Graph {
-    PIE,
-    BAR,
-    LINE,
-    SCATTER
-};
-
 typedef struct {
-    enum Graph type;
     int x_min_max[2];
     float scale_x;
     int y_min_max[2];

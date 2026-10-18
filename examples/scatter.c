@@ -5,7 +5,6 @@ int main(void)
     Context window = {1000.0, 800.0, "PlotFJMS - Teste 2"};
 
     Plane plano = {
-        SCATTER,
         {0, 100}, 10,
         {0, 100}, 10,
         true
@@ -59,7 +58,7 @@ int main(void)
     Data dados[] = {data1, data2, data3};
 
     int data_count = sizeof(dados) / sizeof(dados[0]);
-    create_graph(&window, &plano, dados, data_count);
+    plot_scatter(&window, &plano, dados, data_count);
 
     return 0;
 }
