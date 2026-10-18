@@ -1,6 +1,7 @@
 #include "plane.h"
 #include "plotarea.h"
 #include "raylib.h"
+#include <stdio.h>
 
 static void draw_axis_x(float scale, float min_max[2], bool lines,
                         PlotArea *plot_area);
@@ -10,13 +11,25 @@ static void draw_axis_y(float scale, float min_max[2], bool lines,
 static const int font_size = 15;
 static const int tick_size = 10;
 
+Plane create_plane(float x_min, float x_max, float scale_x, float y_min,
+                   float y_max, float scale_y, bool lines) {
+  if (x_min >= x_max || y_min >= y_max || scale_x <= 0 || scale_y <= 0) {
+    fprintf(stderr, "Error: Invalid parameters when creating Plane.\n");
+    return (Plane){0};
+  }
+
+  Plane plane = {.x_min_max = {x_min, x_max},
+                 .scale_x = scale_x,
+                 .y_min_max = {y_min, y_max},
+                 .scale_y = scale_y,
+                 .lines = lines};
+
+  return plane;
+}
+
 void draw_plane(Plane *plane, PlotArea *plot_area) {
   draw_axis_x(plane->scale_x, plane->x_min_max, plane->lines, plot_area);
   draw_axis_y(plane->scale_y, plane->y_min_max, plane->lines, plot_area);
-
-  // Borda do grafico
-  DrawRectangleLines((int)plot_area->left, (int)plot_area->top,
-                     (int)plot_area->width, (int)plot_area->height, BLACK);
 }
 
 /* Eixo X: marcadores embaixo, valores crescendo da esquerda para a direita. */
@@ -38,9 +51,8 @@ static void draw_axis_x(float scale, float min_max[2], bool lines,
   for (int i = 0; i <= number_of_scale; i++) {
     float x = plot_area->left + i * scale_pixel_x;
 
-    DrawRectangle((int)(x - 1),
-                  (int)(plot_area->bottom - (float)tick_size / 2), 2,
-                  tick_size, BLACK);
+    DrawRectangle((int)(x - 1), (int)(plot_area->bottom - (float)tick_size / 2),
+                  2, tick_size, BLACK);
 
     if (lines && i > 0 && i < number_of_scale) {
       DrawLine((int)x, (int)plot_area->top, (int)x, (int)plot_area->bottom,
