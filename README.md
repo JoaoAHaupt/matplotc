@@ -1,9 +1,41 @@
 # quetalformigas
 
+## Dependências
+
+A única dependência externa do matplotc é a **[raylib](https://www.raylib.com/)**
+(cabeçalho + biblioteca). No Linux, a raylib ainda precisa dos cabeçalhos de
+desenvolvimento de X11/OpenGL.
+
+Forma recomendada — um comando detecta a distro e, se a raylib não estiver nos
+repositórios, compila a versão fixada (5.5.0) em `$HOME/.local`:
+
+```
+make deps                # equivale a ./scripts/setup-deps.sh
+```
+
+Para conferir se já está tudo disponível:
+
+```
+make check-deps
+```
+
+Se a raylib foi instalada pelo script (fora do sistema), informe o prefixo na
+compilação:
+
+```
+make RAYLIB_PREFIX=$HOME/.local
+```
+
+Para instalar em outro prefixo ou fixar outra versão:
+
+```
+PREFIX=$HOME/.local RAYLIB_VERSION=5.5.0 ./scripts/setup-deps.sh
+```
+
 baixa o raylib na maquina, depois a gente faz ele ser junto com o projeto
 
 compilar
-gcc pie.c ../src/plane.c ../src/data.c ../src/plotarea.c ../src/plotfjms.c \
+gcc pie.c ../src/plane.c ../src/data.c ../src/plotarea.c ../src/matplotc.c \
                 -I../include -o grafico \
                 -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
