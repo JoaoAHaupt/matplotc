@@ -39,7 +39,8 @@ void plot_scatter(
     Context *context,
     Plane *plane,
     Data *data,
-    int data_count
+    int data_count,
+    bool corr
 )
 {
     InitWindow(context->width, context->height, context->title);
@@ -51,7 +52,7 @@ void plot_scatter(
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        create_scatter(context, plane, data, data_count, &plot_area);
+        create_scatter(context, plane, data, data_count, &plot_area, corr);
 
         EndDrawing();
 

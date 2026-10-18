@@ -1,8 +1,36 @@
 #include "plane.h"
 #include "plotarea.h"
+#include <stdio.h>
 
 static const int font_size = 15;
 static const int tick_size = 10;
+
+
+Plane create_plane(
+    int x_min,
+    int x_max,
+    float scale_x,
+    int y_min,
+    int y_max,
+    float scale_y,
+    bool lines
+) {
+    if (x_min >= x_max || y_min >= y_max ||
+        scale_x <= 0 || scale_y <= 0) {
+        fprintf(stderr, "Error: Invalid parameters when creating Plane.\n");
+        return (Plane){0};
+    }
+
+    Plane plane = {
+        .x_min_max = {x_min, x_max},
+        .scale_x = scale_x,
+        .y_min_max = {y_min, y_max},
+        .scale_y = scale_y,
+        .lines = lines
+    };
+
+    return plane;
+}
 
 void draw_plane(Context *context, Plane *plane, PlotArea *plot)
 {
