@@ -8,7 +8,6 @@ int main(void)
     };
 
     Plane plano = {
-        BAR,
         {1, 6}, 1,
         {0, 2000}, 10,
         false
@@ -46,7 +45,7 @@ int main(void)
     Data dados[] = {data1, data2};
     int data_count = sizeof(dados) / sizeof(dados[0]);
 
-    create_graph(&window, &plano, dados, data_count);
+    plot_bar(&window, &plano, dados, data_count);
 
     return 0;
 }

@@ -8,7 +8,6 @@ int main(void)
     };
 
     Plane plano = {
-        PIE,
         {0, 4}, 1,
         {0, 100}, 10,
         false
@@ -32,7 +31,7 @@ int main(void)
     Data dados[] = {data1};
     int data_count = sizeof(dados) / sizeof(dados[0]);
 
-    create_graph(&window, &plano, dados, data_count);
+    plot_pie(&window, &plano, dados, data_count);
 
     return 0;
 }
