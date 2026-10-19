@@ -1,6 +1,86 @@
 #include <stdio.h>
+#include "matplotc.h"
 
-int main(void) {
-    printf("Hello, world");
+int main(void)
+{
+    int graph;
+
+    printf("MatplotC - selecione um tipo de grafico: \n");
+    printf("1. Barras\n");
+    printf("2. Linha\n");
+    printf("3. Dispersao\n");
+    printf("4. Pizza\n");
+    printf("Opcao: ");
+    scanf("%d", &graph);
+
+    if (graph < 1 || graph > 4) {
+        printf("Opcao invalida. Escolha um numero entre 1 e 4.\n");
+        return 1;
+    }
+
+    Context window = create_context(1000.0, 800.0, "MatplotC");
+    if (window.width == 0.0f || window.height == 0.0f) {
+        return 1;
+    }
+
+    if (graph == 1) {
+        Plane plane = create_plane(1, 6, 1.0, 0, 100, 10.0, false);
+        int x[] = {1, 2, 3, 4, 5, 6};
+        int y[] = {45, 52, 48, 65, 72, 80};
+
+        int size = sizeof(x) / sizeof(x[0]);
+        Data data = create_data(
+            plane, "Vendas", x, "Mes", y, "Vendas", size
+        );
+
+        if (data.size == 0) {
+            return 1;
+        }
+
+        plot_bar(&window, &plane, &data, 1);
+    } else if (graph == 2) {
+        Plane plane = create_plane(0, 100, 10.0, 0, 100, 10.0, true);
+        int x[] = {5, 15, 25, 35, 45, 55, 65, 75, 85, 95};
+        int y[] = {8, 18, 24, 33, 39, 51, 58, 66, 78, 88};
+        Data data = create_data(
+            plane, "Serie de exemplo", x, "Tempo", y, "Valor", 10
+        );
+
+        if (data.size == 0) {
+            return 1;
+        }
+
+        plot_line(&window, &plane, &data, 1);
+    } else if (graph == 3) {
+        Plane plane = create_plane(0, 100, 10.0, 0, 100, 10.0, true);
+        int x1[] = {5, 15, 25, 35, 45, 55, 65, 75, 85, 95};
+        int y1[] = {8, 18, 24, 33, 39, 51, 58, 66, 78, 88};
+        int x2[] = {5, 15, 25, 35, 45, 55, 65, 75, 85, 95};
+        int y2[] = {90, 80, 78, 65, 60, 52, 45, 33, 25, 12};
+        Data data[] = {
+            create_data(plane, "Crescente", x1, "Tempo", y1, "Valor", 10),
+            create_data(plane, "Decrescente", x2, "Tempo", y2, "Valor", 10)
+        };
+
+        if (data[0].size == 0 || data[1].size == 0) {
+            return 1;
+        }
+
+        plot_scatter(&window, &plane, data, 2, true);
+    } else {
+        Plane plane = create_plane(0, 4, 1.0, 0, 100, 10.0, false);
+        int x[] = {1, 2, 3, 4};
+        int y[] = {40, 30, 20, 10};
+        Data data = create_data(
+            plane, "Participacao", x, "Categoria", y, "Percentual", 4
+        );
+
+        if (data.size == 0) {
+            return 1;
+        }
+
+        plot_pie(&window, &plane, &data, 1);
+    }
+
     return 0;
 }

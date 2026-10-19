@@ -4,7 +4,7 @@ int main(void)
 {
     Context window = create_context(
         800.0, 800.0,
-        "PlotFJMS - Teste 2"
+        "MatplotC - Teste 2"
     );
 
     if (window.width == 0)
