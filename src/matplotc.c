@@ -1,148 +1,112 @@
-#include "plane.h"
-#include "data.h"
+#include "matplotc.h"
+#include "bar.h"
 #include "context.h"
+#include "data.h"
+#include "hist.h"
+#include "line.h"
+#include "pie.h"
+#include "plane.h"
 #include "plotarea.h"
 #include "raylib.h"
 #include "scatter.h"
-#include "line.h"
-#include "pie.h"
-#include "bar.h"
-#include "hist.h"
 
+void plot_line(Context *context, Plane *plane, Data *data, int data_count) {
+  InitWindow(context->width, context->height, context->title);
+  SetTargetFPS(60);
 
+  PlotArea plot_area = create_plotarea(context);
 
-void plot_line(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count
-)
-{
-    InitWindow(context->width, context->height, context->title);
-    SetTargetFPS(60);
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    create_line(plane, data, data_count, &plot_area);
 
-    PlotArea plot_area = create_plotarea(context);
+    EndDrawing();
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        create_line(context, plane, data, data_count, &plot_area);
-
-        EndDrawing();
-
-        if (IsKeyPressed(KEY_S)) {
-            TakeScreenshot("grafico.png");
-        }
+    if (IsKeyPressed(KEY_S)) {
+      TakeScreenshot("grafico.png");
     }
-    CloseWindow();
+  }
+  CloseWindow();
 }
 
-void plot_scatter(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count,
-    bool corr
-)
-{
-    InitWindow(context->width, context->height, context->title);
-    SetTargetFPS(60);
+void plot_scatter(Context *context, Plane *plane, Data *data, int data_count,
+                  bool corr) {
+  InitWindow(context->width, context->height, context->title);
+  SetTargetFPS(60);
 
-    PlotArea plot_area = create_plotarea(context);
+  PlotArea plot_area = create_plotarea(context);
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        create_scatter(context, plane, data, data_count, &plot_area, corr);
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    create_scatter(plane, data, data_count, &plot_area, corr);
 
-        EndDrawing();
+    EndDrawing();
 
-        if (IsKeyPressed(KEY_S)) {
-            TakeScreenshot("grafico.png");
-        }
+    if (IsKeyPressed(KEY_S)) {
+      TakeScreenshot("grafico.png");
     }
-    CloseWindow();
+  }
+  CloseWindow();
 }
 
-void plot_pie(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count
-)
-{
-    InitWindow(context->width, context->height, context->title);
-    SetTargetFPS(60);
+void plot_pie(Context *context, Data *data, int data_count) {
+  InitWindow(context->width, context->height, context->title);
+  SetTargetFPS(60);
 
-    PlotArea plot_area = create_plotarea(context);
+  PlotArea plot_area = create_plotarea(context);
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        create_pie(context, plane, data, data_count, &plot_area);
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    create_pie(data, data_count, &plot_area);
 
-        EndDrawing();
+    EndDrawing();
 
-        if (IsKeyPressed(KEY_S)) {
-            TakeScreenshot("grafico.png");
-        }
+    if (IsKeyPressed(KEY_S)) {
+      TakeScreenshot("grafico.png");
     }
-    CloseWindow();
+  }
+  CloseWindow();
 }
 
-void plot_bar(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count
-)
-{
-    InitWindow(context->width, context->height, context->title);
-    SetTargetFPS(60);
+void plot_bar(Context *context, Plane *plane, Data *data, int data_count) {
+  InitWindow(context->width, context->height, context->title);
+  SetTargetFPS(60);
 
-    PlotArea plot_area = create_plotarea(context);
+  PlotArea plot_area = create_plotarea(context);
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        create_bar(context, plane, data, data_count, &plot_area);
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    create_bar(plane, data, data_count, &plot_area);
 
-        EndDrawing();
+    EndDrawing();
 
-        if (IsKeyPressed(KEY_S)) {
-            TakeScreenshot("grafico.png");
-        }
+    if (IsKeyPressed(KEY_S)) {
+      TakeScreenshot("grafico.png");
     }
-    CloseWindow();
+  }
+  CloseWindow();
 }
 
-void plot_histogram(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count
-)
-{
-    InitWindow(context->width, context->height, context->title);
-    SetTargetFPS(60);
+void plot_histogram(Context *context, Plane *plane, Data *data, int data_count) {
+  InitWindow(context->width, context->height, context->title);
+  SetTargetFPS(60);
 
-    PlotArea plot_area = create_plotarea(context);
+  PlotArea plot_area = create_plotarea(context);
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        create_histogram(context, plane, data, data_count, &plot_area);
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    create_histogram(plane, data, data_count, &plot_area);
 
-        EndDrawing();
+    EndDrawing();
 
-        if (IsKeyPressed(KEY_S)) {
-            TakeScreenshot("grafico.png");
-        }
+    if (IsKeyPressed(KEY_S)) {
+      TakeScreenshot("grafico.png");
     }
-    CloseWindow();
+  }
+  CloseWindow();
 }
