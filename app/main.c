@@ -10,11 +10,12 @@ int main(void)
     printf("2. Linha\n");
     printf("3. Dispersao\n");
     printf("4. Pizza\n");
+    printf("5. Histograma\n");
     printf("Opcao: ");
     scanf("%d", &graph);
 
-    if (graph < 1 || graph > 4) {
-        printf("Opcao invalida. Escolha um numero entre 1 e 4.\n");
+    if (graph < 1 || graph > 5) {
+        printf("Opcao invalida. Escolha um numero entre 1 e 5.\n");
         return 1;
     }
 
@@ -67,7 +68,7 @@ int main(void)
         }
 
         plot_scatter(&window, &plane, data, 2, true);
-    } else {
+    } else if (graph == 4) {
         Plane plane = create_plane(0, 4, 1.0, 0, 100, 10.0, false);
         int x[] = {1, 2, 3, 4};
         int y[] = {40, 30, 20, 10};
@@ -80,6 +81,29 @@ int main(void)
         }
 
         plot_pie(&window, &plane, &data, 1);
+    } else {
+        Plane plane = create_plane(0, 100, 10.0, 0, 10, 1.0, false);
+        int values[] = {12, 18, 22, 27, 31, 34, 38, 42, 45, 47,
+                        51, 53, 56, 59, 62, 65, 68, 71, 74, 78,
+                        82, 86, 91, 95};
+                        
+        int sample_indices[sizeof(values) / sizeof(values[0])];
+        int size = (int)(sizeof(values) / sizeof(values[0]));
+
+        for (int i = 0; i < size; i++) {
+            sample_indices[i] = i;
+        }
+
+        Data data = create_data(
+            plane, "Measurements", values, "Measurement",
+            sample_indices, "Frequency", size
+        );
+
+        if (data.size == 0) {
+            return 1;
+        }
+
+        plot_histogram(&window, &plane, &data, 1);
     }
 
     return 0;

@@ -6,6 +6,7 @@
 #include "data.h"
 #include "plotarea.h"
 #include "raylib.h"
+#include "hist.h"
 
 void plot_line(
     Context *context,
@@ -30,6 +31,13 @@ void plot_pie(
 );
 
 void plot_bar(
+    Context *context,
+    Plane *plane,
+    Data *data,
+    int data_count
+);
+
+void plot_histogram(
     Context *context,
     Plane *plane,
     Data *data,

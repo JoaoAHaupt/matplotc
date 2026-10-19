@@ -7,6 +7,7 @@
 #include "line.h"
 #include "pie.h"
 #include "bar.h"
+#include "hist.h"
 
 
 
@@ -109,6 +110,33 @@ void plot_bar(
         BeginDrawing();
         ClearBackground(RAYWHITE);
         create_bar(context, plane, data, data_count, &plot_area);
+
+        EndDrawing();
+
+        if (IsKeyPressed(KEY_S)) {
+            TakeScreenshot("grafico.png");
+        }
+    }
+    CloseWindow();
+}
+
+void plot_histogram(
+    Context *context,
+    Plane *plane,
+    Data *data,
+    int data_count
+)
+{
+    InitWindow(context->width, context->height, context->title);
+    SetTargetFPS(60);
+
+    PlotArea plot_area = create_plotarea(context);
+
+    while (!WindowShouldClose())
+    {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        create_histogram(context, plane, data, data_count, &plot_area);
 
         EndDrawing();
 
