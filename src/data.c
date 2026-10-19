@@ -1,9 +1,6 @@
 #include "data.h"
 #include "colours.h"
-#include "data.h"
-#include "plane.h"
-#include "plotarea.h"
-#include "raylib.h"
+#include <stddef.h>
 #include <stdio.h>
 
 Data create_data(Plane plane, const char *label, float *x,

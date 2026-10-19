@@ -28,7 +28,8 @@ void plot_line(Context *context, Plane *plane, Data *data, int data_count) {
   CloseWindow();
 }
 
-void plot_scatter(Context *context, Plane *plane, Data *data, int data_count) {
+void plot_scatter(Context *context, Plane *plane, Data *data, int data_count,
+                  bool corr) {
   InitWindow(context->width, context->height, context->title);
   SetTargetFPS(60);
 
@@ -37,7 +38,7 @@ void plot_scatter(Context *context, Plane *plane, Data *data, int data_count) {
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    create_scatter(plane, data, data_count, &plot_area);
+    create_scatter(plane, data, data_count, &plot_area, corr);
 
     EndDrawing();
 

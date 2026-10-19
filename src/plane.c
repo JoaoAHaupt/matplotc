@@ -30,6 +30,10 @@ Plane create_plane(float x_min, float x_max, float scale_x, float y_min,
 void draw_plane(Plane *plane, PlotArea *plot_area) {
   draw_axis_x(plane->scale_x, plane->x_min_max, plane->lines, plot_area);
   draw_axis_y(plane->scale_y, plane->y_min_max, plane->lines, plot_area);
+
+  // Borda do grafico
+  DrawRectangleLines((int)plot_area->left, (int)plot_area->top,
+                     (int)plot_area->width, (int)plot_area->height, BLACK);
 }
 
 /* Eixo X: marcadores embaixo, valores crescendo da esquerda para a direita. */
@@ -51,8 +55,9 @@ static void draw_axis_x(float scale, float min_max[2], bool lines,
   for (int i = 0; i <= number_of_scale; i++) {
     float x = plot_area->left + i * scale_pixel_x;
 
-    DrawRectangle((int)(x - 1), (int)(plot_area->bottom - (float)tick_size / 2),
-                  2, tick_size, BLACK);
+    DrawRectangle((int)(x - 1),
+                  (int)(plot_area->bottom - (float)tick_size / 2), 2,
+                  tick_size, BLACK);
 
     if (lines && i > 0 && i < number_of_scale) {
       DrawLine((int)x, (int)plot_area->top, (int)x, (int)plot_area->bottom,
@@ -99,7 +104,6 @@ static void draw_axis_y(float scale, float min_max[2], bool lines,
     const char *label = TextFormat("%g", value);
     int text_width = MeasureText(label, font_size);
 
-    // Rótulo alinhado à direita do marcador, centralizado verticalmente.
     DrawText(label,
              (int)(plot_area->left - (float)tick_size / 2 - 8 - text_width),
              (int)(y - (float)font_size / 2), font_size, BLACK);
