@@ -1,4 +1,4 @@
-#include "plotfjms.h"
+#include "matplotc.h"
 
 int main(void)
 {
@@ -13,8 +13,8 @@ int main(void)
         true
     };
 
-    int x1[] = {1990, 2000, 2010, 2020, 2025};
-    int y1[] = {150, 170, 191, 211, 213};
+    float x1[] = {1990, 2000, 2010, 2020, 2025};
+    float y1[] = {150, 170, 191, 211, 213};
     int size1 = sizeof(x1) / sizeof(x1[0]);
 
     Data data1 = {
@@ -27,8 +27,8 @@ int main(void)
         size1
     };
 
-    int x2[] = {1990, 2000, 2010, 2020, 2025};
-    int y2[] = {50, 65, 80, 100, 115};
+    float x2[] = {1990, 2000, 2010, 2020, 2025};
+    float y2[] = {50, 65, 80, 100, 115};
     int size2 = sizeof(x2) / sizeof(x2[0]);
 
     Data data2 = {
@@ -41,8 +41,8 @@ int main(void)
         size2
     };
 
-    int x3[] = {1990, 2000, 2010, 2020, 2025};
-    int y3[] = {80, 110, 90, 130, 100};
+    float x3[] = {1990, 2000, 2010, 2020, 2025};
+    float y3[] = {80, 110, 90, 130, 100};
     int size3 = sizeof(x3) / sizeof(x3[0]);
 
     Data data3 = {

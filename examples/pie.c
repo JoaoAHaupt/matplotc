@@ -1,4 +1,4 @@
-#include "plotfjms.h"
+#include "matplotc.h"
 
 int main(void)
 {
@@ -13,8 +13,8 @@ int main(void)
         false
     };
 
-    int x1[] = {1, 2, 3, 4};
-    int y1[] = {40, 30, 20, 10};
+    float x1[] = {1, 2, 3, 4};
+    float y1[] = {40, 30, 20, 10};
 
     int size1 = sizeof(y1) / sizeof(y1[0]);
 

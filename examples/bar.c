@@ -1,4 +1,4 @@
-#include "plotfjms.h"
+#include "matplotc.h"
 
 int main(void)
 {
@@ -8,14 +8,14 @@ int main(void)
     };
 
     Plane plano = {
-        {1, 6}, 1,
-        {0, 2000}, 10,
+        {0, 7}, 1,
+        {0, 2000}, 200,
         false
     };
 
     // Vendas da Loja Centro (em milhares de reais)
-    int x1[] = {1990, 1991, 1992, 1993, 1994, 1995};
-    int y1[] = {45, 52, 48, 65, 72, 80};
+    float x1[] = {1, 2, 3, 4, 5, 6};
+    float y1[] = {45, 52, 48, 65, 72, 80};
     int n1 = sizeof(x1) / sizeof(x1[0]);
 
     Data data1 = {
@@ -28,8 +28,8 @@ int main(void)
         n1
     };
 
-    int x2[] = {1, 2, 3, 4, 5, 6};
-    int y2[] = {60, 55, 70, 68, 85, 95};
+    float x2[] = {1, 2, 3, 4, 5, 6};
+    float y2[] = {60, 55, 70, 68, 85, 95};
     int n2 = sizeof(x2) / sizeof(x2[0]);
 
     Data data2 = {
