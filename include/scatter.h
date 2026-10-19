@@ -13,12 +13,17 @@ void draw_scatter_data(
     PlotArea *plot
 );
 
+void draw_linear_correlation(Data *data, int data_count, Plane *plane, PlotArea *plot);
+
+
 void create_scatter(
     Context *context,
     Plane *plane,
     Data *data,
     int data_count,
-    PlotArea *plotarea
+    PlotArea *plotarea,
+    bool show_regression
+
 );
 
 #endif

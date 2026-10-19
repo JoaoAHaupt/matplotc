@@ -16,6 +16,16 @@ typedef struct {
     int size;
 } Data;
 
+Data create_data(
+    Plane plane,
+    const char *label,
+    int *x,
+    const char *x_axis_label,
+    int *y,
+    const char *y_axis_label,
+    int size
+);
+
 void draw_line_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
 void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
 void draw_pie_data(Data *data, int data_count, Plane *plane, PlotArea *plot);

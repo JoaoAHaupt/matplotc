@@ -18,7 +18,8 @@ void plot_scatter(
     Context *context,
     Plane *plane,
     Data *data,
-    int data_count
+    int data_count,
+    bool corr
 );
 
 void plot_pie(

@@ -13,6 +13,16 @@ typedef struct {
     bool lines;
 } Plane;
 
+Plane create_plane(
+    int x_min,
+    int x_max,
+    float scale_x,
+    int y_min,
+    int y_max,
+    float scale_y,
+    bool lines
+);
+
 void draw_plane(Context *context, Plane *plane, PlotArea *plot);
 
 #endif

@@ -3,7 +3,40 @@
 #include "plotarea.h"
 #include "raylib.h"
 #include "colours.h"
-#include <math.h>
+#include "data.h"
+#include <stdio.h>
+
+Data create_data(
+    Plane plane,
+    const char *label,
+    int *x,
+    const char *x_axis_label,
+    int *y,
+    const char *y_axis_label,
+    int size
+) {
+    if (size <= 0 || x == NULL || y == NULL) {
+        fprintf(stderr, "Error: Invalid data arrays or size.\n");
+        return (Data){0};
+    }
+
+    if (label == NULL || x_axis_label == NULL || y_axis_label == NULL) {
+        fprintf(stderr, "Error: Data labels cannot be NULL.\n");
+        return (Data){0};
+    }
+
+    Data data = {
+        .plane = plane,
+        .label = (char *)label,
+        .x = x,
+        .x_axis_label = (char *)x_axis_label,
+        .y = y,
+        .y_axis_label = (char *)y_axis_label,
+        .size = size
+    };
+
+    return data;
+}
 
 int data_size(Data *data){
     return sizeof(data)/sizeof(data[0]);
