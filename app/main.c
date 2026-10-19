@@ -74,7 +74,7 @@ int main(void) {
       return 1;
     }
 
-    plot_pie(&window, &plane, &data, 1);
+    plot_pie(&window, &data, 1);
   } else {
     Plane plane = create_plane(0, 100, 10.0, 0, 10, 1.0, false);
     float values[] = {12, 18, 22, 27, 31, 34, 38, 42, 45, 47, 51, 53,

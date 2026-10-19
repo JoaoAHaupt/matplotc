@@ -51,7 +51,7 @@ void plot_scatter(Context *context, Plane *plane, Data *data, int data_count,
   CloseWindow();
 }
 
-void plot_pie(Context *context, Plane *plane, Data *data, int data_count) {
+void plot_pie(Context *context, Data *data, int data_count) {
   InitWindow(context->width, context->height, context->title);
   SetTargetFPS(60);
 
@@ -60,7 +60,7 @@ void plot_pie(Context *context, Plane *plane, Data *data, int data_count) {
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    create_pie(plane, data, data_count, &plot_area);
+    create_pie(data, data_count, &plot_area);
 
     EndDrawing();
 
@@ -91,8 +91,7 @@ void plot_bar(Context *context, Plane *plane, Data *data, int data_count) {
   CloseWindow();
 }
 
-void plot_histogram(Context *context, Plane *plane, Data *data,
-                    int data_count) {
+void plot_histogram(Context *context, Plane *plane, Data *data, int data_count) {
   InitWindow(context->width, context->height, context->title);
   SetTargetFPS(60);
 
