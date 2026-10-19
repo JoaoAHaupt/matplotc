@@ -13,12 +13,6 @@ void draw_line_data(
     PlotArea *plot
 );
 
-void create_line(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count,
-    PlotArea *plotarea
-);
+void create_line(Plane *plane, Data *data, int data_count, PlotArea *plotarea);
 
 #endif
