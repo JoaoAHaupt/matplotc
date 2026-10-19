@@ -4,9 +4,13 @@
 #include "raylib.h"
 #include "colours.h"
 #include <math.h>
+#include <stddef.h>
 
 int data_size(Data *data){
-    return sizeof(data)/sizeof(data[0]);
+    if (data == NULL) {
+        return 0;
+    }
+    return data->size;
 }
 
 void draw_label(Data *data, Plane *plane, PlotArea *plot)
