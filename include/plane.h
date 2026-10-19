@@ -1,28 +1,20 @@
 #ifndef PLANE_H
 #define PLANE_H
 
-#include "raylib.h"
-#include "context.h"
 #include "plotarea.h"
+#include <stdbool.h>
 
 typedef struct {
-    int x_min_max[2];
-    float scale_x;
-    int y_min_max[2];
-    float scale_y;
-    bool lines;
+  float x_min_max[2];
+  float scale_x;
+  float y_min_max[2];
+  float scale_y;
+  bool lines;
 } Plane;
 
-Plane create_plane(
-    int x_min,
-    int x_max,
-    float scale_x,
-    int y_min,
-    int y_max,
-    float scale_y,
-    bool lines
-);
+void draw_plane(Plane *plane, PlotArea *plot_area);
 
-void draw_plane(Context *context, Plane *plane, PlotArea *plot);
+Plane create_plane(float x_min, float x_max, float scale_x, float y_min,
+                   float y_max, float scale_y, bool lines);
 
 #endif
