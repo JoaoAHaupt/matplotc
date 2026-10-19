@@ -22,9 +22,6 @@ Plane create_plane(float x_min, float x_max, float scale_x, float y_min,
   return plane;
 }
 
-static void draw_axis_x(float scale, float min_max[2], bool lines, PlotArea *plot_area);
-static void draw_axis_y(float scale, float min_max[2], bool lines, PlotArea *plot_area);
-
 void draw_plane(Plane *plane, PlotArea *plot_area) {
   draw_axis_x(plane->scale_x, plane->x_min_max, plane->lines, plot_area);
   draw_axis_y(plane->scale_y, plane->y_min_max, plane->lines, plot_area);
@@ -35,7 +32,7 @@ void draw_plane(Plane *plane, PlotArea *plot_area) {
 }
 
 /* Eixo X: marcadores embaixo, valores crescendo da esquerda para a direita. */
-static void draw_axis_x(float scale, float min_max[2], bool lines,
+void draw_axis_x(float scale, float min_max[2], bool lines,
                  PlotArea *plot_area) {
   if (scale <= 0.0f) {
     return;
@@ -72,7 +69,7 @@ static void draw_axis_x(float scale, float min_max[2], bool lines,
 }
 
 /* Eixo Y: marcadores na esquerda, valores crescendo de baixo para cima. */
-static void draw_axis_y(float scale, float min_max[2], bool lines,
+void draw_axis_y(float scale, float min_max[2], bool lines,
                  PlotArea *plot_area) {
   if (scale <= 0.0f) {
     return;
