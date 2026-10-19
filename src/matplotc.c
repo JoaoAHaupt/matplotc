@@ -1,21 +1,14 @@
+#include "matplotc.h"
 #include "bar.h"
 #include "context.h"
 #include "data.h"
+#include "hist.h"
 #include "line.h"
 #include "pie.h"
 #include "plane.h"
 #include "plotarea.h"
 #include "raylib.h"
 #include "scatter.h"
-<<<<<<< HEAD
-#include "line.h"
-#include "pie.h"
-#include "bar.h"
-#include "hist.h"
-
-
-=======
->>>>>>> feat/use-continuos-xy-axes
 
 void plot_line(Context *context, Plane *plane, Data *data, int data_count) {
   InitWindow(context->width, context->height, context->title);
@@ -37,38 +30,17 @@ void plot_line(Context *context, Plane *plane, Data *data, int data_count) {
   CloseWindow();
 }
 
-<<<<<<< HEAD
-void plot_scatter(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count,
-    bool corr
-)
-{
-    InitWindow(context->width, context->height, context->title);
-    SetTargetFPS(60);
-=======
 void plot_scatter(Context *context, Plane *plane, Data *data, int data_count,
                   bool corr) {
   InitWindow(context->width, context->height, context->title);
   SetTargetFPS(60);
->>>>>>> feat/use-continuos-xy-axes
 
   PlotArea plot_area = create_plotarea(context);
 
-<<<<<<< HEAD
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        create_scatter(context, plane, data, data_count, &plot_area, corr);
-=======
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(RAYWHITE);
     create_scatter(plane, data, data_count, &plot_area, corr);
->>>>>>> feat/use-continuos-xy-axes
 
     EndDrawing();
 
@@ -119,29 +91,23 @@ void plot_bar(Context *context, Plane *plane, Data *data, int data_count) {
   CloseWindow();
 }
 
-void plot_histogram(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count
-)
-{
-    InitWindow(context->width, context->height, context->title);
-    SetTargetFPS(60);
+void plot_histogram(Context *context, Plane *plane, Data *data,
+                    int data_count) {
+  InitWindow(context->width, context->height, context->title);
+  SetTargetFPS(60);
 
-    PlotArea plot_area = create_plotarea(context);
+  PlotArea plot_area = create_plotarea(context);
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        create_histogram(context, plane, data, data_count, &plot_area);
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    create_histogram(plane, data, data_count, &plot_area);
 
-        EndDrawing();
+    EndDrawing();
 
-        if (IsKeyPressed(KEY_S)) {
-            TakeScreenshot("grafico.png");
-        }
+    if (IsKeyPressed(KEY_S)) {
+      TakeScreenshot("grafico.png");
     }
-    CloseWindow();
+  }
+  CloseWindow();
 }
