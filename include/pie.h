@@ -1,24 +1,12 @@
 #ifndef PIE_H
 #define PIE_H
 
-#include "plane.h"
 #include "data.h"
-#include "context.h"
+#include "plane.h"
 #include "plotarea.h"
 
-void draw_pie_data(
-    Data *data,
-    int data_count,
-    Plane *plane,
-    PlotArea *plot
-);
+void draw_pie_data(Data *data, int data_count);
 
-void create_pie(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count,
-    PlotArea *plotarea
-);
+void create_pie(Plane *plane, Data *data, int data_count, PlotArea *plotarea);
 
 #endif
