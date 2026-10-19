@@ -3,6 +3,33 @@
 #include "data.h"
 #include "plotarea.h"
 #include "raylib.h"
+<<<<<<< HEAD
+#include "colours.h"
+#include <stddef.h>
+
+void draw_pie_data(Data *data, int data_count, Plane *plane, PlotArea *plot)
+{
+    if (data == NULL || plane == NULL || plot == NULL || data_count <= 0 ||
+        plane->x_min_max[1] <= plane->x_min_max[0] ||
+        plane->y_min_max[1] <= plane->y_min_max[0]) {
+        return;
+    }
+
+    float total = 0;
+    for (int j = 0; j < data_count; j++) {
+        if (data[j].x == NULL || data[j].y == NULL || data[j].size <= 0) {
+            continue;
+        }
+
+        for (int i = 0; i < data[j].size; i++) {
+            int x = data[j].x[i];
+            int y = data[j].y[i];
+            if (x >= plane->x_min_max[0] && x <= plane->x_min_max[1] &&
+                y >= plane->y_min_max[0] && y <= plane->y_min_max[1]) {
+                total += y;
+            }
+        }
+=======
 
 // Legenda do gráfico de pizza: uma entrada por fatia (e não por série),
 // usando o valor de x como nome da categoria.
@@ -11,6 +38,7 @@ static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
   for (int j = 0; j < data_count; j++) {
     for (int i = 0; i < data[j].size; i++) {
       total += data[j].y[i];
+>>>>>>> 76782c276986f9369752c276a9f8d1f344ff99e8
     }
   }
 
@@ -21,9 +49,26 @@ static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
   float font_size = 16.0f;
   float spacing = 1.0f;
 
+<<<<<<< HEAD
+    for (int j = 0; j < data_count; j++) {
+        if (data[j].x == NULL || data[j].y == NULL || data[j].size <= 0) {
+            continue;
+        }
+
+        for (int i = 0; i < data[j].size; i++) {
+            int x = data[j].x[i];
+            int y = data[j].y[i];
+            if (x < plane->x_min_max[0] || x > plane->x_min_max[1] ||
+                y < plane->y_min_max[0] || y > plane->y_min_max[1]) {
+                continue;
+            }
+
+            float angle = ((float)y / total) * 360.0f;
+=======
   float box_size = 12.0f;
   float padding = 8.0f;
   float line_height = 24.0f;
+>>>>>>> 76782c276986f9369752c276a9f8d1f344ff99e8
 
   float legend_x = plotarea->right - 150;
   float legend_y = plotarea->top + 10;

@@ -8,6 +8,10 @@ make test
 
 O alvo `make test` compila a biblioteca, gera **um executável por arquivo `.c`**
 desta pasta e roda todos em sequência, retornando erro se algum falhar.
+Os testes de barras, histograma, linha, pizza e dispersão substituem as chamadas
+de desenho do raylib por capturadores, permitindo verificar os elementos
+desenhados sem abrir uma janela. Também verificam que pontos fora dos limites
+definidos no `Plane` são ignorados.
 
 ## framework.h
 
@@ -17,7 +21,7 @@ Cada arquivo em tests/ é compilado em um executável independente (ver a regra 
 
 1. chamar `MT_BEGIN("nome da suíte")`;
 2. usar uma das asserções (`MT_CHECK`, `MT_CHECK_INT`, ...);
-3. 3. retornar `MT_END()` do main.
+3. retornar `MT_END()` do main.
 
 ```c
 #include "framework.h"
