@@ -13,12 +13,6 @@ void draw_bar_data(
     PlotArea *plot
 );
 
-void create_bar(
-    Context *context,
-    Plane *plane,
-    Data *data,
-    int data_count,
-    PlotArea *plotarea
-);
+void create_bar(Plane *plane, Data *data, int data_count, PlotArea *plotarea);
 
 #endif
