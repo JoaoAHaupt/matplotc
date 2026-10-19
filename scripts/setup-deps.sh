@@ -76,10 +76,39 @@ detect_pm() {
 }
 
 PM="$(detect_pm)"
+MSYS2_PREFIX=""
+if [ "$PM" = pacman ] && [ -n "${MSYSTEM:-}" ]; then
+    case "$MSYSTEM" in
+        MINGW32)    MSYS2_PREFIX="mingw-w64-i686" ;;
+        MINGW64)    MSYS2_PREFIX="mingw-w64-x86_64" ;;
+        UCRT64)     MSYS2_PREFIX="mingw-w64-ucrt-x86_64" ;;
+        CLANG32)    MSYS2_PREFIX="mingw-w64-clang-i686" ;;
+        CLANG64)    MSYS2_PREFIX="mingw-w64-clang-x86_64" ;;
+        CLANGARM64) MSYS2_PREFIX="mingw-w64-clang-aarch64" ;;
+        MSYS)       die "abra um shell MINGW64, UCRT64 ou CLANG64 do MSYS2 para instalar a raylib." ;;
+        *)          die "ambiente MSYS2 não reconhecido: MSYSTEM=$MSYSTEM" ;;
+    esac
+fi
+
 if [ "$(id -u)" -ne 0 ] && have sudo; then
     SUDO="sudo"
 else
     SUDO=""
+fi
+
+# raylib já está disponível?
+raylib_ok() {
+    if have pkg-config && pkg-config --exists raylib 2>/dev/null; then
+        return 0
+    fi
+    # tenta compilar um pequeno programa, cobrindo instalações sem .pc
+    printf '#include <raylib.h>\nint main(void){return 0;}\n' \
+        | "$cc" -x c - -o /dev/null 2>/dev/null
+}
+
+if raylib_ok; then
+    say "raylib já está instalada: $( (have pkg-config && pkg-config --modversion raylib 2>/dev/null) || echo 'disponível' )"
+    exit 0
 fi
 
 install_system_deps() {
@@ -99,9 +128,15 @@ install_system_deps() {
                 libXi-devel libXcursor-devel
             ;;
         pacman)
-            $SUDO pacman -Sy --needed --noconfirm \
-                base-devel pkgconf git alsa-lib \
-                mesa libx11 libxrandr libxinerama libxi libxcursor
+            if [ -n "$MSYS2_PREFIX" ]; then
+                $SUDO pacman -S --needed --noconfirm \
+                    "${MSYS2_PREFIX}-gcc" "${MSYS2_PREFIX}-pkgconf" \
+                    git make tar curl
+            else
+                $SUDO pacman -Sy --needed --noconfirm \
+                    base-devel pkgconf git alsa-lib \
+                    mesa libx11 libxrandr libxinerama libxi libxcursor
+            fi
             ;;
         zypper)
             $SUDO zypper --non-interactive install \
@@ -128,7 +163,13 @@ install_raylib_package() {
     case "$PM" in
         apt)    pkg="libraylib-dev" ;;
         dnf)    pkg="raylib-devel" ;;
-        pacman) pkg="raylib" ;;
+        pacman)
+            if [ -n "$MSYS2_PREFIX" ]; then
+                pkg="${MSYS2_PREFIX}-raylib"
+            else
+                pkg="raylib"
+            fi
+            ;;
         zypper) pkg="raylib-devel" ;;
         apk)    pkg="raylib-dev" ;;
         *)      return 1 ;;
@@ -188,6 +229,7 @@ build_raylib_from_source() {
 
 
 install_system_deps
+
 
 if ! install_raylib_package; then
     warn "a raylib não está disponível como pacote da distribuição."
