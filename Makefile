@@ -75,7 +75,7 @@ $(STATIC_LIB): $(OBJS) | $(LIB_DIR)
 	ar rcs $@ $^
 
 $(SHARED_LIB): $(OBJS) | $(LIB_DIR)
-	$(CC) -shared -o $@ $^
+	$(CC) -shared -o $@ $^ $(LDLIBS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@

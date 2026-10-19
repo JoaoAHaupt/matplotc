@@ -7,11 +7,17 @@ A única dependência externa do matplotc é a **[raylib](https://www.raylib.com
 desenvolvimento de X11/OpenGL.
 
 Forma recomendada — um comando detecta a distro e, se a raylib não estiver nos
-repositórios, compila a versão fixada (5.5.0) em `$HOME/.local`:
+repositórios, compila a versão fixada (5.5.0) em `$HOME/.local`;
+No Windows, execute o comando em um shell MinGW64, UCRT64 ou CLANG64 do
+MSYS2:
 
 ```
 make deps                # equivale a ./scripts/setup-deps.sh
 ```
+
+
+
+make deps; o script instala o GCC e a raylib para a arquitetura do shell.
 
 Para conferir se já está tudo disponível:
 

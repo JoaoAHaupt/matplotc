@@ -5,7 +5,7 @@ int main(void)
     Context window = create_context(
         800.0,
         800.0,
-        "PlotFJMS - Pie Chart Test"
+        "MatplotC - Pie Chart Test"
     );
 
     if (window.width == 0) {

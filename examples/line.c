@@ -4,7 +4,7 @@ int main(void)
 {
     Context window = create_context(
         1000.0, 800.0,
-        "PlotFJMS - Populacao do Brasil"
+        "MatplotC - Populacao do Brasil"
     );
 
     if (window.width == 0)
