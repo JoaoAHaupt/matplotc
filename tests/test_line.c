@@ -24,9 +24,9 @@ int main(void)
 {
   MT_BEGIN("line graph");
 
-  int x[] = {0, 5, 10};
-  int y[] = {0, 5, 10};
-  Data data = {.x = x, .y = y, .size = 3};
+  int x[] = {0, 5, 10, 11, 5, 5};
+  int y[] = {0, 5, 10, 5, 11, -1};
+  Data data = {.x = x, .y = y, .size = 6};
   Plane plane = {
       .x_min_max = {0, 10},
       .y_min_max = {0, 10},

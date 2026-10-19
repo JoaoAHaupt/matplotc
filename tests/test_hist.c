@@ -29,8 +29,8 @@ int main(void)
 {
   MT_BEGIN("histogram");
 
-  int samples[] = {1, 1, 4, 10};
-  Data data = {.x = samples, .size = 4};
+  int samples[] = {-1, 1, 1, 4, 10, 11};
+  Data data = {.x = samples, .size = 6};
   Plane plane = {
       .x_min_max = {0, 10},
       .scale_x = 2.0f,

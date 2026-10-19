@@ -34,6 +34,16 @@ Plane create_plane(
 
 void draw_plane(Context *context, Plane *plane, PlotArea *plot)
 {
+    draw_plane_with_x_inset(context, plane, plot, 0.0f);
+}
+
+void draw_plane_with_x_inset(
+    Context *context,
+    Plane *plane,
+    PlotArea *plot,
+    float x_inset
+)
+{
     (void)context;
 
     float graph_width = plot->width;
@@ -52,11 +62,12 @@ void draw_plane(Context *context, Plane *plane, PlotArea *plot)
         return;
     }
 
-    float scale_pixel_x = graph_width / number_of_scale_x;
+    float x_axis_width = graph_width - 2.0f * x_inset;
+    float scale_pixel_x = x_axis_width / number_of_scale_x;
     float value_x = plane->x_min_max[0];
 
     for (int i = 0; i <= number_of_scale_x; i++) {
-        float x = graph_left + i * scale_pixel_x;
+        float x = graph_left + x_inset + i * scale_pixel_x;
 
         // marcadorzin
         DrawRectangle(

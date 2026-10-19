@@ -32,9 +32,13 @@ int main(void)
 {
   MT_BEGIN("pie chart");
 
-  int values[] = {1, 3};
-  Data data = {.y = values, .size = 2};
-  Plane plane = {0};
+  int x[] = {1, 3, 11, 5};
+  int values[] = {1, 3, 5, 11};
+  Data data = {.x = x, .y = values, .size = 4};
+  Plane plane = {
+      .x_min_max = {0, 10},
+      .y_min_max = {0, 10},
+  };
   PlotArea plot = {0};
 
   draw_pie_data(&data, 1, &plane, &plot);
@@ -49,7 +53,10 @@ int main(void)
 
   sector_count = 0;
   int non_positive_values[] = {0, -1};
+  int valid_x[] = {1, 2};
+  data.x = valid_x;
   data.y = non_positive_values;
+  data.size = 2;
   draw_pie_data(&data, 1, &plane, &plot);
   MT_CHECK_INT(0, sector_count);
 

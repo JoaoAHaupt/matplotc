@@ -24,5 +24,11 @@ Plane create_plane(
 );
 
 void draw_plane(Context *context, Plane *plane, PlotArea *plot);
+void draw_plane_with_x_inset(
+    Context *context,
+    Plane *plane,
+    PlotArea *plot,
+    float x_inset
+);
 
 #endif

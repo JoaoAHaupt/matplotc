@@ -35,9 +35,9 @@ int main(void)
 {
   MT_BEGIN("scatter plot and regression");
 
-  int x[] = {0, 10};
-  int y[] = {0, 10};
-  Data data = {.x = x, .y = y, .size = 2};
+  int x[] = {0, 10, -1, 5, 5};
+  int y[] = {0, 10, 5, 11, -1};
+  Data data = {.x = x, .y = y, .size = 5};
   Plane plane = {
       .x_min_max = {0, 10},
       .y_min_max = {0, 10},
@@ -64,6 +64,19 @@ int main(void)
   MT_CHECK_FLOAT(10.0f, line_start.x, 0.001f);
   MT_CHECK_FLOAT(120.0f, line_start.y, 0.001f);
   MT_CHECK_FLOAT(110.0f, line_end.x, 0.001f);
+  MT_CHECK_FLOAT(20.0f, line_end.y, 0.001f);
+
+  int clipped_x[] = {4, 6};
+  int clipped_y[] = {0, 10};
+  data.x = clipped_x;
+  data.y = clipped_y;
+  data.size = 2;
+  line_count = 0;
+  draw_linear_correlation(&data, 1, &plane, &plot);
+  MT_CHECK_INT(1, line_count);
+  MT_CHECK_FLOAT(50.0f, line_start.x, 0.001f);
+  MT_CHECK_FLOAT(120.0f, line_start.y, 0.001f);
+  MT_CHECK_FLOAT(70.0f, line_end.x, 0.001f);
   MT_CHECK_FLOAT(20.0f, line_end.y, 0.001f);
 
   line_count = 0;
