@@ -21,16 +21,16 @@ Cada arquivo em tests/ é compilado em um executável independente (ver a regra 
 
 ```c
 #include "framework.h"
-#include "plotarea.h"
+#include "matplotc.h"
 
 int main(void)
 {
-    MT_BEGIN("plotarea");
-    Context c = { 800.0f, 600.0f, "teste" };
-    PlotArea a = create_plotarea(&c);
+    MT_BEGIN("context and plane");
+    Context c = create_context(800.0f, 600.0f, "teste");
+    MT_CHECK_FLOAT(800.0f, c.width, 0.001f);
 
-    MT_CHECK(a.width > 0.0f);
-    MT_CHECK_FLOAT(680.0f, a.width, 0.001f);
+    Plane p = create_plane(0, 10, 1.0f, 0, 10, 1.0f, false);
+    MT_CHECK_FLOAT(10.0f, p.x_min_max[1], 0.001f);
 
     return MT_END();
 }
