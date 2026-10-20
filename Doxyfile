@@ -1,0 +1,115 @@
+# Doxyfile para o projeto MatplotC
+# Estrutura esperada (enunciado, secao 5):
+#   include/  -> arquivos .h (API publica)
+#   src/      -> arquivos .c (implementacao)
+#   app/      -> aplicacao cliente (main.c)
+#
+# Gerar a documentacao:  doxygen Doxyfile   (ou: make docs)
+# Abrir:                 docs/html/index.html
+# Obs.: opcoes nao listadas aqui usam o valor padrao do Doxygen.
+
+#---------------------------------------------------------------------------
+# Projeto
+#---------------------------------------------------------------------------
+DOXYFILE_ENCODING      = UTF-8
+PROJECT_NAME           = "MatplotC"
+PROJECT_NUMBER         = 1.0
+PROJECT_BRIEF          = "Biblioteca modular em C para graficos (linha, dispersao, pizza, barras e histograma) com raylib"
+OUTPUT_DIRECTORY       = docs
+OUTPUT_LANGUAGE        = Brazilian
+CREATE_SUBDIRS         = NO
+
+#---------------------------------------------------------------------------
+# Linguagem / analise
+#---------------------------------------------------------------------------
+OPTIMIZE_OUTPUT_FOR_C  = YES
+MARKDOWN_SUPPORT       = YES
+AUTOLINK_SUPPORT       = YES
+JAVADOC_AUTOBRIEF      = YES
+TAB_SIZE               = 4
+
+#---------------------------------------------------------------------------
+# Extracao
+# Foco na API publica. Para documentar tambem funcoes internas (static),
+# troque EXTRACT_STATIC para YES.
+#---------------------------------------------------------------------------
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = YES
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = YES
+GENERATE_TODOLIST      = YES
+GENERATE_BUGLIST       = YES
+SHOW_INCLUDE_FILES     = YES
+SHOW_FILES             = YES
+
+#---------------------------------------------------------------------------
+# Mensagens
+#---------------------------------------------------------------------------
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
+WARN_LOGFILE           = docs/doxygen_warnings.log
+
+#---------------------------------------------------------------------------
+# Arquivos de entrada
+#---------------------------------------------------------------------------
+INPUT                  = include src app
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.c *.h
+RECURSIVE              = YES
+EXCLUDE                = build lib bin docs tests
+EXCLUDE_PATTERNS       = */build/* */.git/*
+STRIP_FROM_PATH        = .
+STRIP_FROM_INC_PATH    = include
+EXAMPLE_PATH           = app
+
+#---------------------------------------------------------------------------
+# Codigo-fonte
+#---------------------------------------------------------------------------
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+VERBATIM_HEADERS       = YES
+
+#---------------------------------------------------------------------------
+# Saidas
+#---------------------------------------------------------------------------
+ALPHABETICAL_INDEX     = YES
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_DYNAMIC_SECTIONS  = YES
+GENERATE_TREEVIEW      = YES
+SEARCHENGINE           = YES
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+
+#---------------------------------------------------------------------------
+# Pre-processador
+#---------------------------------------------------------------------------
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+SEARCH_INCLUDES        = YES
+INCLUDE_PATH           = include
+
+#---------------------------------------------------------------------------
+# Grafos (requer Graphviz: sudo apt install graphviz)
+# Se nao tiver instalado, mantenha HAVE_DOT = NO.
+#---------------------------------------------------------------------------
+HAVE_DOT               = NO
+DOT_IMAGE_FORMAT       = svg
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+DIRECTORY_GRAPH        = YES

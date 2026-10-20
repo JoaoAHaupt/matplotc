@@ -47,15 +47,6 @@ Data create_data(Plane plane, const char *label, float *x,
                  const char *x_axis_label, float *y, const char *y_axis_label,
                  int size);
 
-/** @copydoc draw_line_data */
-void draw_line_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
-
-/** @copydoc draw_bar_data */
-void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
-
-/** @copydoc draw_pie_data */
-void draw_pie_data(Data *data, int data_count);
-
 /**
  * @brief Desenha os rótulos dos eixos x e y.
  *

@@ -1,3 +1,8 @@
+/**
+ * @file scatter.c
+ * @brief Implementação do gráfico de dispersão (ver scatter.h).
+ */
+
 #include "scatter.h"
 #include "colours.h"
 #include "data.h"
