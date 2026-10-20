@@ -1,3 +1,10 @@
+/**
+ * @file bar.c
+ * @brief Implementação do gráfico de barras.
+ *
+ * A documentação das funções públicas está em bar.h.
+ */
+
 #include "bar.h"
 #include "colours.h"
 #include "data.h"

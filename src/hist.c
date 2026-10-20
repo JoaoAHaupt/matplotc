@@ -1,3 +1,8 @@
+/**
+ * @file hist.c
+ * @brief Implementação do histograma (ver hist.h).
+ */
+
 #include "hist.h"
 #include "colours.h"
 #include "raylib.h"

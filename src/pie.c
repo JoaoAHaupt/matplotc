@@ -1,11 +1,24 @@
+/**
+ * @file pie.c
+ * @brief Implementação do gráfico de pizza (ver pie.h).
+ */
+
 #include "pie.h"
 #include "colours.h"
 #include "data.h"
 #include "plotarea.h"
 #include "raylib.h"
 
-// Legenda do gráfico de pizza: uma entrada por fatia (e não por série),
-// usando o valor de x como nome da categoria.
+/**
+ * @brief Desenha a legenda do gráfico de pizza.
+ *
+ * Uma entrada por fatia (e não por série), usando o valor de x como nome
+ * da categoria e mostrando o percentual da fatia.
+ *
+ * @param data       Vetor de séries de dados.
+ * @param data_count Quantidade de séries em @p data.
+ * @param plotarea   Área de plotagem em pixels (posiciona a legenda).
+ */
 static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
   float total = 0;
   for (int j = 0; j < data_count; j++) {

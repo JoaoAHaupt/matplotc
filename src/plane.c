@@ -1,9 +1,16 @@
+/**
+ * @file plane.c
+ * @brief Implementação do plano cartesiano e dos eixos (ver plane.h).
+ */
+
 #include "plane.h"
 #include "plotarea.h"
 #include "raylib.h"
 #include <stdio.h>
 
+/** @brief Tamanho da fonte dos valores dos eixos, em pixels. */
 static const int font_size = 15;
+/** @brief Comprimento das marcações (ticks) dos eixos, em pixels. */
 static const int tick_size = 10;
 
 Plane create_plane(float x_min, float x_max, float scale_x, float y_min,

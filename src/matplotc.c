@@ -1,3 +1,12 @@
+/**
+ * @file matplotc.c
+ * @brief Implementação das funções de plotagem da API pública (ver matplotc.h).
+ *
+ * Todas as funções seguem o mesmo fluxo: abrem a janela, criam a área de
+ * plotagem e, a cada quadro (60 FPS), limpam o fundo e desenham o gráfico.
+ * A tecla S salva uma captura em `grafico.png`.
+ */
+
 #include "matplotc.h"
 #include "bar.h"
 #include "context.h"

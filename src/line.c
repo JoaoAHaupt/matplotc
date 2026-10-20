@@ -1,3 +1,8 @@
+/**
+ * @file line.c
+ * @brief Implementação do gráfico de linhas (ver line.h).
+ */
+
 #include "line.h"
 #include "colours.h"
 #include "data.h"

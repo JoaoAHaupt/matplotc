@@ -1,3 +1,8 @@
+/**
+ * @file data.c
+ * @brief Implementação das séries de dados, rótulos e legenda (ver data.h).
+ */
+
 #include "data.h"
 #include "colours.h"
 #include <stddef.h>

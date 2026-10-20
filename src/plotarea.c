@@ -1,3 +1,8 @@
+/**
+ * @file plotarea.c
+ * @brief Implementação do cálculo da área de plotagem (ver plotarea.h).
+ */
+
 #include "plotarea.h"
 
 PlotArea create_plotarea(Context *context) {

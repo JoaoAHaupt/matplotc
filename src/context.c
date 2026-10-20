@@ -1,3 +1,8 @@
+/**
+ * @file context.c
+ * @brief Implementação da criação do contexto da janela (ver context.h).
+ */
+
 #include "context.h"
 #include <stdio.h>
 
