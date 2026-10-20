@@ -25,6 +25,11 @@ void draw_scatter_data(Data *data, int data_count, Plane *plane,
       float point_y = plot->bottom - (data[j].y[i] - plane->y_min_max[0]) /
                                          y_range * plot->height;
 
+      /* Limita à área do gráfico antes de converter para int: um ponto muito
+       * fora do plano poderia gerar coordenada maior que INT_MAX (UB). */
+      point_x = fminf(fmaxf(point_x, plot->left), plot->right);
+      point_y = fminf(fmaxf(point_y, plot->top), plot->bottom);
+
       DrawCircle((int)point_x, (int)point_y, 5, COLOURS[j % COLOURS_COUNT]);
     }
   }
