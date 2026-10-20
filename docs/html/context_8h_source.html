@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MatplotC: Código-Fonte de include/context.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MatplotC<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Biblioteca modular em C para graficos (linha, dispersao, pizza, barras e histograma) com raylib</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Busca',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('context_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">context.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="context_8h.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef CONTEXT_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define CONTEXT_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span></div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="structContext.html">   12</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structContext.html#a83ce9e5c66c8703efee80a03edecab9e">   13</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="structContext.html#a83ce9e5c66c8703efee80a03edecab9e">width</a>;        </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structContext.html#ab68be66d9dac39b3bcecbe90d8bdf69b">   14</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="structContext.html#ab68be66d9dac39b3bcecbe90d8bdf69b">height</a>;       </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structContext.html#acb64359eb8b3026130d4096d52054897">   15</a></span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_variable" href="structContext.html#acb64359eb8b3026130d4096d52054897">title</a>;  </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>} <a class="code hl_struct" href="structContext.html">Context</a>;</div>
+</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><a class="code hl_struct" href="structContext.html">Context</a> <a class="code hl_function" href="context_8h.html#a94aa5d98ad08e44c141a1962a43adecb">create_context</a>(<span class="keywordtype">float</span> width, <span class="keywordtype">float</span> height, <span class="keyword">const</span> <span class="keywordtype">char</span> *title);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="acontext_8h_html_a94aa5d98ad08e44c141a1962a43adecb"><div class="ttname"><a href="context_8h.html#a94aa5d98ad08e44c141a1962a43adecb">create_context</a></div><div class="ttdeci">Context create_context(float width, float height, const char *title)</div><div class="ttdoc">Cria um contexto de janela validando os parâmetros.</div><div class="ttdef"><b>Definição</b> <a href="context_8c_source.html#l00009">context.c:9</a></div></div>
+<div class="ttc" id="astructContext_html"><div class="ttname"><a href="structContext.html">Context</a></div><div class="ttdoc">Parâmetros da janela do gráfico.</div><div class="ttdef"><b>Definição</b> <a href="#l00012">context.h:12</a></div></div>
+<div class="ttc" id="astructContext_html_a83ce9e5c66c8703efee80a03edecab9e"><div class="ttname"><a href="structContext.html#a83ce9e5c66c8703efee80a03edecab9e">Context::width</a></div><div class="ttdeci">float width</div><div class="ttdoc">Largura da janela em pixels.</div><div class="ttdef"><b>Definição</b> <a href="#l00013">context.h:13</a></div></div>
+<div class="ttc" id="astructContext_html_ab68be66d9dac39b3bcecbe90d8bdf69b"><div class="ttname"><a href="structContext.html#ab68be66d9dac39b3bcecbe90d8bdf69b">Context::height</a></div><div class="ttdeci">float height</div><div class="ttdoc">Altura da janela em pixels.</div><div class="ttdef"><b>Definição</b> <a href="#l00014">context.h:14</a></div></div>
+<div class="ttc" id="astructContext_html_acb64359eb8b3026130d4096d52054897"><div class="ttname"><a href="structContext.html#acb64359eb8b3026130d4096d52054897">Context::title</a></div><div class="ttdeci">const char * title</div><div class="ttdoc">Título da janela.</div><div class="ttdef"><b>Definição</b> <a href="#l00015">context.h:15</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><a href="context_8h.html">context.h</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

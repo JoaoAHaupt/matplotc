@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MatplotC: Código-Fonte de src/plotarea.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MatplotC<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Biblioteca modular em C para graficos (linha, dispersao, pizza, barras e histograma) com raylib</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Busca',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('plotarea_8c_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">plotarea.c</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="plotarea_8c.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="plotarea_8h.html">plotarea.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="plotarea_8h.html#a809d2adc1f7a355a236b9bb04400b6cf">    8</a></span><a class="code hl_struct" href="structPlotArea.html">PlotArea</a> <a class="code hl_function" href="plotarea_8c.html#a809d2adc1f7a355a236b9bb04400b6cf">create_plotarea</a>(<a class="code hl_struct" href="structContext.html">Context</a> *context) {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  <a class="code hl_struct" href="structPlotArea.html">PlotArea</a> area;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  area.<a class="code hl_variable" href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">padding_left</a> = context-&gt;<a class="code hl_variable" href="structContext.html#a83ce9e5c66c8703efee80a03edecab9e">width</a> * 0.10f;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  area.<a class="code hl_variable" href="structPlotArea.html#afc334bf361742f8261f7a71b36865d0a">padding_right</a> = context-&gt;<a class="code hl_variable" href="structContext.html#a83ce9e5c66c8703efee80a03edecab9e">width</a> * 0.05f;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  area.<a class="code hl_variable" href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">padding_top</a> = context-&gt;<a class="code hl_variable" href="structContext.html#ab68be66d9dac39b3bcecbe90d8bdf69b">height</a> * 0.05f;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  area.<a class="code hl_variable" href="structPlotArea.html#a800f5eb1cd1d2bf79a97f53c9fb59dc9">padding_bottom</a> = context-&gt;<a class="code hl_variable" href="structContext.html#ab68be66d9dac39b3bcecbe90d8bdf69b">height</a> * 0.075f;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">padding_left</a> &lt; 50)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    area.<a class="code hl_variable" href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">padding_left</a> = 50;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">padding_left</a> &gt; 100)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    area.<a class="code hl_variable" href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">padding_left</a> = 100;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#afc334bf361742f8261f7a71b36865d0a">padding_right</a> &lt; 25)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    area.<a class="code hl_variable" href="structPlotArea.html#afc334bf361742f8261f7a71b36865d0a">padding_right</a> = 25;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#afc334bf361742f8261f7a71b36865d0a">padding_right</a> &gt; 60)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    area.<a class="code hl_variable" href="structPlotArea.html#afc334bf361742f8261f7a71b36865d0a">padding_right</a> = 60;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">padding_top</a> &lt; 25)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    area.<a class="code hl_variable" href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">padding_top</a> = 25;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">padding_top</a> &gt; 60)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    area.<a class="code hl_variable" href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">padding_top</a> = 60;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#a800f5eb1cd1d2bf79a97f53c9fb59dc9">padding_bottom</a> &lt; 40)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    area.<a class="code hl_variable" href="structPlotArea.html#a800f5eb1cd1d2bf79a97f53c9fb59dc9">padding_bottom</a> = 40;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordflow">if</span> (area.<a class="code hl_variable" href="structPlotArea.html#a800f5eb1cd1d2bf79a97f53c9fb59dc9">padding_bottom</a> &gt; 80)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    area.<a class="code hl_variable" href="structPlotArea.html#a800f5eb1cd1d2bf79a97f53c9fb59dc9">padding_bottom</a> = 80;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  area.<a class="code hl_variable" href="structPlotArea.html#a692065a5e8a647a84e7c6da03d5f6f84">left</a> = area.<a class="code hl_variable" href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">padding_left</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  area.<a class="code hl_variable" href="structPlotArea.html#ac069c98e8e8886179e7403f27bdccc10">top</a> = area.<a class="code hl_variable" href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">padding_top</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  area.<a class="code hl_variable" href="structPlotArea.html#afaf214001268c9f808d4b8bbac6476bf">width</a> = context-&gt;<a class="code hl_variable" href="structContext.html#a83ce9e5c66c8703efee80a03edecab9e">width</a> - area.<a class="code hl_variable" href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">padding_left</a> - area.<a class="code hl_variable" href="structPlotArea.html#afc334bf361742f8261f7a71b36865d0a">padding_right</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  area.<a class="code hl_variable" href="structPlotArea.html#add863a8743abe24bbc60db96429d9f46">height</a> = context-&gt;<a class="code hl_variable" href="structContext.html#ab68be66d9dac39b3bcecbe90d8bdf69b">height</a> - area.<a class="code hl_variable" href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">padding_top</a> - area.<a class="code hl_variable" href="structPlotArea.html#a800f5eb1cd1d2bf79a97f53c9fb59dc9">padding_bottom</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  area.<a class="code hl_variable" href="structPlotArea.html#aa0d7c30576bfad63dce6bc4da4c3cc37">right</a> = area.<a class="code hl_variable" href="structPlotArea.html#a692065a5e8a647a84e7c6da03d5f6f84">left</a> + area.<a class="code hl_variable" href="structPlotArea.html#afaf214001268c9f808d4b8bbac6476bf">width</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  area.<a class="code hl_variable" href="structPlotArea.html#a8d78094de7f0f4e0312d06b5dc542724">bottom</a> = area.<a class="code hl_variable" href="structPlotArea.html#ac069c98e8e8886179e7403f27bdccc10">top</a> + area.<a class="code hl_variable" href="structPlotArea.html#add863a8743abe24bbc60db96429d9f46">height</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">return</span> area;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
+</div>
+<div class="ttc" id="aplotarea_8c_html_a809d2adc1f7a355a236b9bb04400b6cf"><div class="ttname"><a href="plotarea_8c.html#a809d2adc1f7a355a236b9bb04400b6cf">create_plotarea</a></div><div class="ttdeci">PlotArea create_plotarea(Context *context)</div><div class="ttdoc">Calcula a área de plotagem a partir do tamanho da janela.</div><div class="ttdef"><b>Definição</b> <a href="#l00008">plotarea.c:8</a></div></div>
+<div class="ttc" id="aplotarea_8h_html"><div class="ttname"><a href="plotarea_8h.html">plotarea.h</a></div><div class="ttdoc">Área de plotagem: região da janela onde o gráfico é desenhado.</div></div>
+<div class="ttc" id="astructContext_html"><div class="ttname"><a href="structContext.html">Context</a></div><div class="ttdoc">Parâmetros da janela do gráfico.</div><div class="ttdef"><b>Definição</b> <a href="context_8h_source.html#l00012">context.h:12</a></div></div>
+<div class="ttc" id="astructContext_html_a83ce9e5c66c8703efee80a03edecab9e"><div class="ttname"><a href="structContext.html#a83ce9e5c66c8703efee80a03edecab9e">Context::width</a></div><div class="ttdeci">float width</div><div class="ttdoc">Largura da janela em pixels.</div><div class="ttdef"><b>Definição</b> <a href="context_8h_source.html#l00013">context.h:13</a></div></div>
+<div class="ttc" id="astructContext_html_ab68be66d9dac39b3bcecbe90d8bdf69b"><div class="ttname"><a href="structContext.html#ab68be66d9dac39b3bcecbe90d8bdf69b">Context::height</a></div><div class="ttdeci">float height</div><div class="ttdoc">Altura da janela em pixels.</div><div class="ttdef"><b>Definição</b> <a href="context_8h_source.html#l00014">context.h:14</a></div></div>
+<div class="ttc" id="astructPlotArea_html"><div class="ttname"><a href="structPlotArea.html">PlotArea</a></div><div class="ttdoc">Retângulo (em pixels) reservado ao gráfico, com suas margens.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00016">plotarea.h:16</a></div></div>
+<div class="ttc" id="astructPlotArea_html_a3bb02ed5a60807f05edff1f539d9bbbd"><div class="ttname"><a href="structPlotArea.html#a3bb02ed5a60807f05edff1f539d9bbbd">PlotArea::padding_top</a></div><div class="ttdeci">float padding_top</div><div class="ttdoc">Margem superior em pixels.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00019">plotarea.h:19</a></div></div>
+<div class="ttc" id="astructPlotArea_html_a692065a5e8a647a84e7c6da03d5f6f84"><div class="ttname"><a href="structPlotArea.html#a692065a5e8a647a84e7c6da03d5f6f84">PlotArea::left</a></div><div class="ttdeci">float left</div><div class="ttdoc">Coordenada x da borda esquerda.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00025">plotarea.h:25</a></div></div>
+<div class="ttc" id="astructPlotArea_html_a7a62592a51faeae0a588ce132a5a3182"><div class="ttname"><a href="structPlotArea.html#a7a62592a51faeae0a588ce132a5a3182">PlotArea::padding_left</a></div><div class="ttdeci">float padding_left</div><div class="ttdoc">Margem esquerda em pixels.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00017">plotarea.h:17</a></div></div>
+<div class="ttc" id="astructPlotArea_html_a800f5eb1cd1d2bf79a97f53c9fb59dc9"><div class="ttname"><a href="structPlotArea.html#a800f5eb1cd1d2bf79a97f53c9fb59dc9">PlotArea::padding_bottom</a></div><div class="ttdeci">float padding_bottom</div><div class="ttdoc">Margem inferior em pixels.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00020">plotarea.h:20</a></div></div>
+<div class="ttc" id="astructPlotArea_html_a8d78094de7f0f4e0312d06b5dc542724"><div class="ttname"><a href="structPlotArea.html#a8d78094de7f0f4e0312d06b5dc542724">PlotArea::bottom</a></div><div class="ttdeci">float bottom</div><div class="ttdoc">Coordenada y da borda inferior.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00028">plotarea.h:28</a></div></div>
+<div class="ttc" id="astructPlotArea_html_aa0d7c30576bfad63dce6bc4da4c3cc37"><div class="ttname"><a href="structPlotArea.html#aa0d7c30576bfad63dce6bc4da4c3cc37">PlotArea::right</a></div><div class="ttdeci">float right</div><div class="ttdoc">Coordenada x da borda direita.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00026">plotarea.h:26</a></div></div>
+<div class="ttc" id="astructPlotArea_html_ac069c98e8e8886179e7403f27bdccc10"><div class="ttname"><a href="structPlotArea.html#ac069c98e8e8886179e7403f27bdccc10">PlotArea::top</a></div><div class="ttdeci">float top</div><div class="ttdoc">Coordenada y da borda superior.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00027">plotarea.h:27</a></div></div>
+<div class="ttc" id="astructPlotArea_html_add863a8743abe24bbc60db96429d9f46"><div class="ttname"><a href="structPlotArea.html#add863a8743abe24bbc60db96429d9f46">PlotArea::height</a></div><div class="ttdeci">float height</div><div class="ttdoc">Altura útil da área em pixels.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00023">plotarea.h:23</a></div></div>
+<div class="ttc" id="astructPlotArea_html_afaf214001268c9f808d4b8bbac6476bf"><div class="ttname"><a href="structPlotArea.html#afaf214001268c9f808d4b8bbac6476bf">PlotArea::width</a></div><div class="ttdeci">float width</div><div class="ttdoc">Largura útil da área em pixels.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00022">plotarea.h:22</a></div></div>
+<div class="ttc" id="astructPlotArea_html_afc334bf361742f8261f7a71b36865d0a"><div class="ttname"><a href="structPlotArea.html#afc334bf361742f8261f7a71b36865d0a">PlotArea::padding_right</a></div><div class="ttdeci">float padding_right</div><div class="ttdoc">Margem direita em pixels.</div><div class="ttdef"><b>Definição</b> <a href="plotarea_8h_source.html#l00018">plotarea.h:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>src</b></li><li class="navelem"><a href="plotarea_8c.html">plotarea.c</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

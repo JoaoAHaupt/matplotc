@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MatplotC: Referência do Arquivo include/pie.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MatplotC<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Biblioteca modular em C para graficos (linha, dispersao, pizza, barras e histograma) com raylib</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Busca',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('pie_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referência do Arquivo pie.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Interface do gráfico de pizza.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="data_8h_source.html">data.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="plotarea_8h_source.html">plotarea.h</a>&quot;</code><br />
+</div>
+<p><a href="pie_8h_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a913a7bf328179e42aa722be3fcb36f91" id="r_a913a7bf328179e42aa722be3fcb36f91"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a913a7bf328179e42aa722be3fcb36f91">create_pie</a> (<a class="el" href="structData.html">Data</a> *data, int data_count, <a class="el" href="structPlotArea.html">PlotArea</a> *plotarea)</td></tr>
+<tr class="memdesc:a913a7bf328179e42aa722be3fcb36f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria o gráfico de pizza completo (fatias e legenda).  <br /></td></tr>
+<tr class="memitem:ac433b46503b5a34cf0a72e28b204bbc3" id="r_ac433b46503b5a34cf0a72e28b204bbc3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac433b46503b5a34cf0a72e28b204bbc3">draw_pie_data</a> (<a class="el" href="structData.html">Data</a> *data, int data_count)</td></tr>
+<tr class="memdesc:ac433b46503b5a34cf0a72e28b204bbc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desenha as fatias do gráfico de pizza.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Interface do gráfico de pizza. </p>
+
+<p class="definition">Definição no arquivo <a class="el" href="pie_8h_source.html">pie.h</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Funções</h2>
+<a id="a913a7bf328179e42aa722be3fcb36f91" name="a913a7bf328179e42aa722be3fcb36f91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a913a7bf328179e42aa722be3fcb36f91">&#9670;&#160;</a></span>create_pie()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void create_pie </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structData.html">Data</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>data_count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPlotArea.html">PlotArea</a> *</td>          <td class="paramname"><span class="paramname"><em>plotarea</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cria o gráfico de pizza completo (fatias e legenda). </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Vetor de séries de dados. </td></tr>
+    <tr><td class="paramname">data_count</td><td>Quantidade de séries em <code class="param">data</code>. </td></tr>
+    <tr><td class="paramname">plotarea</td><td>Área de plotagem em pixels (usada para posicionar a legenda). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definição na linha <a class="el" href="pie_8c_source.html#l00092">92</a> do arquivo <a class="el" href="pie_8c_source.html">pie.c</a>.</p>
+
+<p class="reference">Referencias <a class="el" href="pie_8c_source.html#l00065">draw_pie_data()</a>.</p>
+
+<p class="reference">Referenciado(a) por <a class="el" href="matplotc_8c_source.html#l00063">plot_pie()</a>.</p>
+
+</div>
+</div>
+<a id="ac433b46503b5a34cf0a72e28b204bbc3" name="ac433b46503b5a34cf0a72e28b204bbc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac433b46503b5a34cf0a72e28b204bbc3">&#9670;&#160;</a></span>draw_pie_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void draw_pie_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structData.html">Data</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>data_count</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Desenha as fatias do gráfico de pizza. </p>
+<p>Soma todos os valores de y de todas as séries e desenha uma fatia proporcional para cada valor, começando em 0°, centrada em (400, 400) com raio 150.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Vetor de séries de dados. </td></tr>
+    <tr><td class="paramname">data_count</td><td>Quantidade de séries em <code class="param">data</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Observação</dt><dd>Não desenha nada se a soma dos valores for menor ou igual a zero. </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="pie_8c_source.html#l00065">65</a> do arquivo <a class="el" href="pie_8c_source.html">pie.c</a>.</p>
+
+<p class="reference">Referencias <a class="el" href="colours_8c_source.html#l00009">COLOURS</a>, <a class="el" href="colours_8h_source.html#l00012">COLOURS_COUNT</a>, <a class="el" href="data_8h_source.html#l00028">Data::size</a> e <a class="el" href="data_8h_source.html#l00025">Data::y</a>.</p>
+
+<p class="reference">Referenciado(a) por <a class="el" href="pie_8c_source.html#l00092">create_pie()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><a href="pie_8h.html">pie.h</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

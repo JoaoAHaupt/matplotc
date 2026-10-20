@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MatplotC: Referência do Arquivo include/hist.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MatplotC<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Biblioteca modular em C para graficos (linha, dispersao, pizza, barras e histograma) com raylib</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Busca',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('hist_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referência do Arquivo hist.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Interface do histograma.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="data_8h_source.html">data.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="plane_8h_source.html">plane.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="plotarea_8h_source.html">plotarea.h</a>&quot;</code><br />
+</div>
+<p><a href="hist_8h_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a0d7d8f8ab78d8ca8946c82e7d0061606" id="r_a0d7d8f8ab78d8ca8946c82e7d0061606"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0d7d8f8ab78d8ca8946c82e7d0061606">create_histogram</a> (<a class="el" href="structPlane.html">Plane</a> *plane, <a class="el" href="structData.html">Data</a> *data, int data_count, <a class="el" href="structPlotArea.html">PlotArea</a> *plotarea)</td></tr>
+<tr class="memdesc:a0d7d8f8ab78d8ca8946c82e7d0061606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria o histograma completo.  <br /></td></tr>
+<tr class="memitem:a3bd6f1a6904f7888404188e27853590f" id="r_a3bd6f1a6904f7888404188e27853590f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3bd6f1a6904f7888404188e27853590f">draw_hist_data</a> (<a class="el" href="structData.html">Data</a> *data, int data_count, <a class="el" href="structPlane.html">Plane</a> *plane, <a class="el" href="structPlotArea.html">PlotArea</a> *plot)</td></tr>
+<tr class="memdesc:a3bd6f1a6904f7888404188e27853590f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desenha as barras do histograma de cada série.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Interface do histograma. </p>
+
+<p class="definition">Definição no arquivo <a class="el" href="hist_8h_source.html">hist.h</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Funções</h2>
+<a id="a0d7d8f8ab78d8ca8946c82e7d0061606" name="a0d7d8f8ab78d8ca8946c82e7d0061606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d7d8f8ab78d8ca8946c82e7d0061606">&#9670;&#160;</a></span>create_histogram()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void create_histogram </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structPlane.html">Plane</a> *</td>          <td class="paramname"><span class="paramname"><em>plane</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structData.html">Data</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>data_count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPlotArea.html">PlotArea</a> *</td>          <td class="paramname"><span class="paramname"><em>plotarea</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cria o histograma completo. </p>
+<p>Desenha, em ordem: o plano (eixos e grade), as barras, os rótulos dos eixos e a legenda.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">plane</td><td>Plano cartesiano. </td></tr>
+    <tr><td class="paramname">data</td><td>Vetor de séries de dados. </td></tr>
+    <tr><td class="paramname">data_count</td><td>Quantidade de séries em <code class="param">data</code>. </td></tr>
+    <tr><td class="paramname">plotarea</td><td>Área de plotagem em pixels. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definição na linha <a class="el" href="hist_8c_source.html#l00121">121</a> do arquivo <a class="el" href="hist_8c_source.html">hist.c</a>.</p>
+
+<p class="reference">Referencias <a class="el" href="hist_8c_source.html#l00013">draw_hist_data()</a>, <a class="el" href="data_8c_source.html#l00042">draw_label()</a>, <a class="el" href="data_8c_source.html#l00064">draw_legend()</a> e <a class="el" href="plane_8c_source.html#l00032">draw_plane()</a>.</p>
+
+<p class="reference">Referenciado(a) por <a class="el" href="matplotc_8c_source.html#l00103">plot_histogram()</a>.</p>
+
+</div>
+</div>
+<a id="a3bd6f1a6904f7888404188e27853590f" name="a3bd6f1a6904f7888404188e27853590f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bd6f1a6904f7888404188e27853590f">&#9670;&#160;</a></span>draw_hist_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void draw_hist_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structData.html">Data</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>data_count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPlane.html">Plane</a> *</td>          <td class="paramname"><span class="paramname"><em>plane</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPlotArea.html">PlotArea</a> *</td>          <td class="paramname"><span class="paramname"><em>plot</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Desenha as barras do histograma de cada série. </p>
+<p>Os valores de <code>x</code> de cada série são distribuídos em classes (bins) de largura <code>plane-&gt;scale_x</code> entre os limites de x do plano. A altura de cada barra é a frequência (contagem) de valores na classe. Se o número de classes exceder a largura da área em pixels, ele é reduzido e a largura da classe é recalculada. A última classe inclui o limite superior de x. Com várias séries, as barras de cada classe são colocadas lado a lado.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Vetor de séries (apenas <code>x</code> é usado). </td></tr>
+    <tr><td class="paramname">data_count</td><td>Quantidade de séries em <code class="param">data</code>. </td></tr>
+    <tr><td class="paramname">plane</td><td>Plano cartesiano (limites de x/y e <code>scale_x</code>). </td></tr>
+    <tr><td class="paramname">plot</td><td>Área de plotagem em pixels.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Observação</dt><dd>Não faz nada se os parâmetros forem inválidos (ponteiros NULL, limites invertidos, <code>scale_x</code> não positivo ou não finito, etc.). </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="hist_8c_source.html#l00013">13</a> do arquivo <a class="el" href="hist_8c_source.html">hist.c</a>.</p>
+
+<p class="reference">Referencias <a class="el" href="plotarea_8h_source.html#l00028">PlotArea::bottom</a>, <a class="el" href="colours_8c_source.html#l00009">COLOURS</a>, <a class="el" href="colours_8h_source.html#l00012">COLOURS_COUNT</a>, <a class="el" href="plotarea_8h_source.html#l00023">PlotArea::height</a>, <a class="el" href="plotarea_8h_source.html#l00025">PlotArea::left</a>, <a class="el" href="plotarea_8h_source.html#l00026">PlotArea::right</a>, <a class="el" href="plane_8h_source.html#l00017">Plane::scale_x</a>, <a class="el" href="data_8h_source.html#l00028">Data::size</a>, <a class="el" href="plotarea_8h_source.html#l00027">PlotArea::top</a>, <a class="el" href="plotarea_8h_source.html#l00022">PlotArea::width</a>, <a class="el" href="plane_8h_source.html#l00016">Plane::x_min_max</a> e <a class="el" href="plane_8h_source.html#l00018">Plane::y_min_max</a>.</p>
+
+<p class="reference">Referenciado(a) por <a class="el" href="hist_8c_source.html#l00121">create_histogram()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><a href="hist_8h.html">hist.h</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

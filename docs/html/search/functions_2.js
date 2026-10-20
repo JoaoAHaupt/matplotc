@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['plot_5fbar_0',['plot_bar',['../matplotc_8h.html#a9fdb3c300d65809dc7171577a1ca47d9',1,'plot_bar(Context *context, Plane *plane, Data *data, int data_count):&#160;matplotc.c'],['../matplotc_8c.html#a9fdb3c300d65809dc7171577a1ca47d9',1,'plot_bar(Context *context, Plane *plane, Data *data, int data_count):&#160;matplotc.c']]],
+  ['plot_5fhistogram_1',['plot_histogram',['../matplotc_8h.html#a1d643b626580a268e9aba26612533e9e',1,'plot_histogram(Context *context, Plane *plane, Data *data, int data_count):&#160;matplotc.c'],['../matplotc_8c.html#a1d643b626580a268e9aba26612533e9e',1,'plot_histogram(Context *context, Plane *plane, Data *data, int data_count):&#160;matplotc.c']]],
+  ['plot_5fline_2',['plot_line',['../matplotc_8h.html#a985bf3703f34d4ba0e39129ec6ff5439',1,'plot_line(Context *context, Plane *plane, Data *data, int data_count):&#160;matplotc.c'],['../matplotc_8c.html#a985bf3703f34d4ba0e39129ec6ff5439',1,'plot_line(Context *context, Plane *plane, Data *data, int data_count):&#160;matplotc.c']]],
+  ['plot_5fpie_3',['plot_pie',['../matplotc_8h.html#aa3ad6b92b01cca50fa299d2cc72a16a3',1,'plot_pie(Context *context, Data *data, int data_count):&#160;matplotc.c'],['../matplotc_8c.html#aa3ad6b92b01cca50fa299d2cc72a16a3',1,'plot_pie(Context *context, Data *data, int data_count):&#160;matplotc.c']]],
+  ['plot_5fscatter_4',['plot_scatter',['../matplotc_8h.html#ab74eec41f3e811ae919f8b503aecc408',1,'plot_scatter(Context *context, Plane *plane, Data *data, int data_count, bool corr):&#160;matplotc.c'],['../matplotc_8c.html#ab74eec41f3e811ae919f8b503aecc408',1,'plot_scatter(Context *context, Plane *plane, Data *data, int data_count, bool corr):&#160;matplotc.c']]]
+];
