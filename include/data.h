@@ -32,8 +32,9 @@ Data create_data(Plane plane, const char *label, float *x,
 Data load_data(const char *path, Plane plane, const char *label,
                const char *x_axis_label, const char *y_axis_label);
 
-/* Libera os arrays alocados por load_data e zera a struct. Inofensiva para
- * Data vinda de create_data (arrays do chamador) e para NULL. */
+/* Libera os arrays alocados por load_data (owns_memory = true). Para Data
+ * vinda de create_data os arrays pertencem ao chamador e não são liberados;
+ * nesse caso a função não faz nada. Segura para NULL. */
 void free_data(Data *data);
 
 #endif
