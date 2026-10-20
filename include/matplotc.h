@@ -12,4 +12,6 @@ void plot_pie(Context *context, Data *data, int data_count);
 void plot_bar(Context *context, Plane *plane, Data *data, int data_count);
 void plot_histogram(Context *context, Plane *plane, Data *data, int data_count);
 
+void show(Context *context);
+
 #endif
