@@ -53,8 +53,21 @@ make install    # instala a biblioteca e os headers públicos (PREFIX=/usr/local
 make clean
 ```
 
-A aplicação de exemplo (`app/main.c`) apresenta um menu de gráficos; as
-opções 6 e 7 usam `examples/vendas.txt` e a exportação PNG, respectivamente.
+A aplicação de exemplo (`app/main.c`) apresenta um menu com um gráfico por
+opção — útil para ver cada tipo de desenho rapidamente:
+
+| Opção | O que faz |
+| --- | --- |
+| 1 | Barras (uma série: vendas por mês) |
+| 2 | Linhas (uma série) |
+| 3 | Dispersão (duas séries, com reta de regressão) |
+| 4 | Pizza (participação por categoria) |
+| 5 | Histograma (distribuição de amostras) |
+| 6 | Barras com dados lidos de `examples/vendas.txt` |
+| 7 | Barras com `examples/vendas.txt` e exportação para `grafico.png` |
+
+Nas opções 1-6 abre-se a janela interativa (`show`); a opção 7 demonstra o
+`export_png` (gera `grafico.png` sem abrir janela).
 
 ## Como funciona
 
@@ -188,6 +201,7 @@ src/                # implementação da biblioteca
   line.c / scatter.c / bar.c / pie.c / hist.c   # um por tipo de gráfico
   colours.c         #   paleta de cores
 app/                # aplicação de exemplo (menu interativo)
+docs/               # documentação (este README e o relatório)
 examples/           # dados de exemplo (vendas.txt)
 tests/              # testes automatizados (make test)
 ```

@@ -25,6 +25,11 @@ void draw_scatter_data(Data *data, int data_count, Plane *plane,
       float point_y = plot->bottom - (data[j].y[i] - plane->y_min_max[0]) /
                                          y_range * plot->height;
 
+      /* Limita à área do gráfico antes de converter para int: um ponto muito
+       * fora do plano poderia gerar coordenada maior que INT_MAX (UB). */
+      point_x = fminf(fmaxf(point_x, plot->left), plot->right);
+      point_y = fminf(fmaxf(point_y, plot->top), plot->bottom);
+
       DrawCircle((int)point_x, (int)point_y, 5, COLOURS[j % COLOURS_COUNT]);
     }
   }
@@ -47,7 +52,7 @@ void create_scatter(Plane *plane, Data *data, int data_count,
   }
   EndScissorMode();
 
-  draw_label(data, plane, plotarea);
+  draw_label(data, plotarea);
   draw_legend(data, data_count, plotarea);
 }
 
@@ -94,17 +99,21 @@ void draw_linear_correlation(Data *data, int data_count, Plane *plane,
     double y1 = a * x1 + b;
     double y2 = a * x2 + b;
 
+    /* A regressão é calculada em double e convertida para float na hora de
+     * jogar na tela. */
     float screen_x1 =
-        plot->left + (x1 - plane->x_min_max[0]) / x_range * plot->width;
+        (float)(plot->left + (x1 - plane->x_min_max[0]) / x_range * plot->width);
 
     float screen_y1 =
-        plot->bottom - (y1 - plane->y_min_max[0]) / y_range * plot->height;
+        (float)(plot->bottom -
+                (y1 - plane->y_min_max[0]) / y_range * plot->height);
 
     float screen_x2 =
-        plot->left + (x2 - plane->x_min_max[0]) / x_range * plot->width;
+        (float)(plot->left + (x2 - plane->x_min_max[0]) / x_range * plot->width);
 
     float screen_y2 =
-        plot->bottom - (y2 - plane->y_min_max[0]) / y_range * plot->height;
+        (float)(plot->bottom -
+                (y2 - plane->y_min_max[0]) / y_range * plot->height);
 
     DrawLineEx((Vector2){screen_x1, screen_y1}, (Vector2){screen_x2, screen_y2},
                1.0f, COLOURS[j % COLOURS_COUNT]);

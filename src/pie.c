@@ -6,18 +6,31 @@
 #include "raylib.h"
 #include <stddef.h>
 
-// Legenda do gráfico de pizza: uma entrada por fatia (e não por série),
-// usando o valor de x como nome da categoria.
-static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
+/* Soma de todos os valores de y das séries. Retorna 0 se não houver dados. */
+static float total_value(Data *data, int data_count) {
+  if (data == NULL || data_count <= 0) {
+    return 0.0f;
+  }
+
   float total = 0;
   for (int j = 0; j < data_count; j++) {
+    if (data[j].y == NULL) {
+      continue;
+    }
     for (int i = 0; i < data[j].size; i++) {
       total += data[j].y[i];
     }
   }
+  return total;
+}
 
-  if (total <= 0)
+/* Legenda do gráfico de pizza: uma entrada por fatia (e não por série),
+ * usando o valor de x como nome da categoria. */
+static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
+  float total = total_value(data, data_count);
+  if (total <= 0) {
     return;
+  }
 
   Font font = GetFontDefault();
   float font_size = 16.0f;
@@ -32,8 +45,12 @@ static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
 
   int slice = 0;
   for (int j = 0; j < data_count; j++) {
+    if (data[j].y == NULL) {
+      continue;
+    }
+
     for (int i = 0; i < data[j].size; i++) {
-      float y = legend_y + slice * line_height;
+      float y = legend_y + (float)slice * line_height;
 
       // Caixinha colorida com a cor da fatia
       DrawRectangle((int)legend_x, (int)y, (int)box_size, (int)box_size,
@@ -70,21 +87,19 @@ static void pie_geometry(PlotArea *plotarea, Vector2 *center, float *radius) {
 
 static void draw_pie_slices(Data *data, int data_count, Vector2 center,
                             float radius) {
-  float total = 0;
-  // soma todos os valores de y
-  for (int j = 0; j < data_count; j++) {
-    for (int i = 0; i < data[j].size; i++) {
-      total += data[j].y[i];
-    }
-  }
-
-  if (total <= 0)
+  float total = total_value(data, data_count);
+  if (total <= 0) {
     return;
+  }
 
   float start_angle = 0;
   int slice = 0;
 
   for (int j = 0; j < data_count; j++) {
+    if (data[j].y == NULL) {
+      continue;
+    }
+
     for (int i = 0; i < data[j].size; i++) {
       // calcula o angulo
       float angle = (data[j].y[i] / total) * 360.0f;
@@ -96,18 +111,6 @@ static void draw_pie_slices(Data *data, int data_count, Vector2 center,
       slice++;
     }
   }
-}
-
-void draw_pie_data(Data *data, int data_count) {
-  /* Sem área informada: usa a janela atual inteira. */
-  Context context = {.width = (float)GetScreenWidth(),
-                     .height = (float)GetScreenHeight(),
-                     .title = ""};
-  PlotArea plotarea = create_plotarea(&context);
-  Vector2 center;
-  float radius;
-  pie_geometry(&plotarea, &center, &radius);
-  draw_pie_slices(data, data_count, center, radius);
 }
 
 void create_pie(Data *data, int data_count, PlotArea *plotarea) {

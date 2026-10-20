@@ -115,7 +115,8 @@ void draw_axis_y(float scale, float min_max[2], bool lines,
     int text_width = MeasureText(label, font_size);
 
     DrawText(label,
-             (int)(plot_area->left - (float)tick_size / 2 - 8 - text_width),
-             (int)(y - (float)font_size / 2), font_size, BLACK);
+             (int)(plot_area->left - (float)tick_size / 2.0f - 8.0f -
+                   (float)text_width),
+             (int)(y - (float)font_size / 2.0f), font_size, BLACK);
   }
 }
