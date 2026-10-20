@@ -1,5 +1,7 @@
 #include "hist.h"
 #include "colours.h"
+#include "data_draw.h"
+#include "plane_draw.h"
 #include "raylib.h"
 #include <limits.h>
 #include <math.h>

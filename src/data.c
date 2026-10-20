@@ -1,5 +1,6 @@
 #include "data.h"
 #include "colours.h"
+#include "data_draw.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>

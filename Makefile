@@ -1,6 +1,6 @@
 # Compilação
 CC       := gcc
-CFLAGS   := -Wall -Wextra -std=c11 -O2 -Iinclude -MMD -MP
+CFLAGS   := -Wall -Wextra -std=c11 -O2 -Iinclude -Iinclude/internal -MMD -MP
 LDFLAGS  :=
 
 PREFIX   ?= /usr/local
@@ -58,6 +58,9 @@ SRCS      := $(wildcard $(SRC_DIR)/*.c)
 OBJS      := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS      := $(OBJS:.o=.d)
 
+# Cabeçalhos públicos (o que o usuário inclui). Os internos em
+# include/internal/ não são instalados: não são API. O -Iinclude/internal no
+# CFLAGS só serve para compilar a própria biblioteca.
 HEADERS   := $(wildcard $(INC_DIR)/*.h)
 
 TEST_SRCS := $(wildcard $(TEST_DIR)/*.c)

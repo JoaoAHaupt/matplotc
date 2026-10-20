@@ -5,8 +5,8 @@
 #include "plane.h"
 #include "plotarea.h"
 
-void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
-
+/* Monta um frame do gráfico de barras na área indicada. Interno: o usuário
+ * chama plot_bar (matplotc.h). */
 void create_bar(Plane *plane, Data *data, int data_count, PlotArea *plotarea);
 
 #endif

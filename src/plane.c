@@ -1,4 +1,5 @@
 #include "plane.h"
+#include "plane_draw.h"
 #include "plotarea.h"
 #include "raylib.h"
 #include <stdio.h>
