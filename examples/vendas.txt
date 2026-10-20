@@ -1,0 +1,11 @@
+# Vendas mensais de exemplo
+# Formato: duas colunas (x y), separadas por espaço ou vírgula.
+# Linhas vazias e comentários (iniciados com '#') são ignorados.
+
+1, 45
+2, 52
+3, 48
+
+4, 65
+5 72
+6, 80

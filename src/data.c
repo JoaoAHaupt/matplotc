@@ -2,6 +2,7 @@
 #include "colours.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 Data create_data(Plane plane, const char *label, float *x,
                  const char *x_axis_label, float *y, const char *y_axis_label,
@@ -22,9 +23,26 @@ Data create_data(Plane plane, const char *label, float *x,
                .x_axis_label = (char *)x_axis_label,
                .y = y,
                .y_axis_label = (char *)y_axis_label,
-               .size = size};
+               .size = size,
+               .owns_memory = false};
 
   return data;
+}
+
+void free_data(Data *data) {
+  if (data == NULL) {
+    return;
+  }
+
+  if (data->owns_memory) {
+    free(data->x);
+    free(data->y);
+  }
+
+  data->x = NULL;
+  data->y = NULL;
+  data->size = 0;
+  data->owns_memory = false;
 }
 
 int data_size(Data *data) {
@@ -35,6 +53,7 @@ int data_size(Data *data) {
 }
 
 void draw_label(Data *data, Plane *plane, PlotArea *plot) {
+  (void)plane; /* eixo já é desenhado por draw_plane */
   Font font = GetFontDefault();
   float font_size = 20.0f;
   float spacing = 1.0f;

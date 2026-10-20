@@ -83,6 +83,43 @@ void show(Context *context) {
   CloseWindow();
 }
 
+bool export_png(Context *context, const char *filename) {
+  if (context == NULL || filename == NULL || filename[0] == '\0') {
+    return false;
+  }
+
+  if (!has_pending) {
+    fprintf(stderr,
+            "Error: nothing to export, call a plot_* function first.\n");
+    return false;
+  }
+
+  /* Janela oculta: a raylib precisa de um contexto gráfico para renderizar,
+   * mas não precisa aparecer na tela. A flag só é aplicada na primeira
+   * InitWindow do processo, então chame export_png antes de show(). */
+  SetConfigFlags(FLAG_WINDOW_HIDDEN);
+  InitWindow(context->width, context->height, context->title);
+  SetTargetFPS(60);
+
+  PlotArea plot_area = create_plotarea(context);
+
+  BeginDrawing();
+  ClearBackground(RAYWHITE);
+  draw_frame(&plot_area);
+  EndDrawing();
+
+  Image image = LoadImageFromScreen();
+  bool ok = ExportImage(image, filename);
+  UnloadImage(image);
+  CloseWindow();
+
+  if (!ok) {
+    fprintf(stderr, "Error: Could not export image to '%s'.\n", filename);
+  }
+
+  return ok;
+}
+
 void plot_line(Context *context, Plane *plane, Data *data, int data_count) {
   if (context == NULL || plane == NULL || data == NULL || data_count <= 0) {
     return;
