@@ -1,0 +1,3 @@
+# apenas comentarios e linhas vazias
+
+# nenhum ponto valido aqui

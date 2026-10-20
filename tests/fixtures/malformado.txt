@@ -1,0 +1,12 @@
+# Linha malformada: so uma coluna
+1
+# Vale com espacos irregulares e comentario no fim da linha
+  2   30   # valor x=2, y=30
+# Separador misto
+3,40
+4   ,   50
+# Linha com texto no lugar de numero (ignorada)
+abc def
+# Linha so com espacos (ignorada)
+   
+6,70
