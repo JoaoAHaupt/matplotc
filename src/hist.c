@@ -97,11 +97,6 @@ void draw_hist_data(Data *data, int data_count, Plane *plane, PlotArea *plot) {
       float left = bin_left + (float)series * bar_width;
       float right = left + bar_width;
 
-      left = fmaxf(left, plot->left);
-      right = fminf(right, plot->right);
-      top = fmaxf(top, plot->top);
-      bottom = fminf(bottom, plot->bottom);
-
       if (right <= left || bottom <= top) {
         continue;
       }
@@ -122,7 +117,14 @@ void create_histogram(Plane *plane, Data *data, int data_count,
   }
 
   draw_plane(plane, plotarea);
+
+  // Recorta o desenho na area do grafico, como em line/bar/scatter: barras
+  // que passam dos limites nao invadem as margens nem os eixos.
+  BeginScissorMode((int)plotarea->left, (int)plotarea->top,
+                   (int)plotarea->width, (int)plotarea->height);
   draw_hist_data(data, data_count, plane, plotarea);
+  EndScissorMode();
+
   draw_label(data, plane, plotarea);
   draw_legend(data, data_count, plotarea);
 }
