@@ -50,12 +50,11 @@ void free_data(Data *data) {
   data->owns_memory = false;
 }
 
-void draw_label(Data *data, Plane *plane, PlotArea *plot) {
+void draw_label(Data *data, PlotArea *plot) {
   if (data == NULL || plot == NULL) {
     return;
   }
 
-  (void)plane; /* eixo já é desenhado por draw_plane */
   Font font = GetFontDefault();
   float font_size = 20.0f;
   float spacing = 1.0f;

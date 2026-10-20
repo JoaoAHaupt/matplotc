@@ -48,6 +48,6 @@ void create_line(Plane *plane, Data *data, int data_count, PlotArea *plotarea) {
   draw_line_data(data, data_count, plane, plotarea);
   EndScissorMode();
 
-  draw_label(data, plane, plotarea);
+  draw_label(data, plotarea);
   draw_legend(data, data_count, plotarea);
 }

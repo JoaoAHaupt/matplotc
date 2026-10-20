@@ -125,6 +125,6 @@ void create_histogram(Plane *plane, Data *data, int data_count,
   draw_hist_data(data, data_count, plane, plotarea);
   EndScissorMode();
 
-  draw_label(data, plane, plotarea);
+  draw_label(data, plotarea);
   draw_legend(data, data_count, plotarea);
 }
