@@ -1,6 +1,11 @@
 #include "plotarea.h"
+#include <stddef.h>
 
 PlotArea create_plotarea(Context *context) {
+  if (context == NULL || context->width <= 0.0f || context->height <= 0.0f) {
+    return (PlotArea){0};
+  }
+
   PlotArea area;
 
   area.padding_left = context->width * 0.10f;

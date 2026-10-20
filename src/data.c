@@ -50,14 +50,11 @@ void free_data(Data *data) {
   data->owns_memory = false;
 }
 
-int data_size(Data *data) {
-  if (data == NULL) {
-    return 0;
-  }
-  return data->size;
-}
-
 void draw_label(Data *data, Plane *plane, PlotArea *plot) {
+  if (data == NULL || plot == NULL) {
+    return;
+  }
+
   (void)plane; /* eixo já é desenhado por draw_plane */
   Font font = GetFontDefault();
   float font_size = 20.0f;
@@ -81,6 +78,10 @@ void draw_label(Data *data, Plane *plane, PlotArea *plot) {
 }
 
 void draw_legend(Data *data, int data_count, PlotArea *plot) {
+  if (data == NULL || plot == NULL || data_count <= 0) {
+    return;
+  }
+
   Font font = GetFontDefault();
   float font_size = 16.0f;
   float spacing = 1.0f;
@@ -99,9 +100,11 @@ void draw_legend(Data *data, int data_count, PlotArea *plot) {
     DrawRectangle((int)legend_x, (int)y, (int)box_size, (int)box_size,
                   COLOURS[i % COLOURS_COUNT]);
 
-    // Nome da série
-    DrawTextEx(font, data[i].label,
-               (Vector2){legend_x + box_size + padding, y - 2}, font_size,
-               spacing, BLACK);
+    // Nome da série (label pode ser NULL em Data montada à mão)
+    if (data[i].label != NULL) {
+      DrawTextEx(font, data[i].label,
+                 (Vector2){legend_x + box_size + padding, y - 2}, font_size,
+                 spacing, BLACK);
+    }
   }
 }
