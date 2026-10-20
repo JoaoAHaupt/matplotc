@@ -1,6 +1,7 @@
 #include "pie.h"
 #include "colours.h"
 #include "data.h"
+#include "data_draw.h"
 #include "plotarea.h"
 #include "raylib.h"
 

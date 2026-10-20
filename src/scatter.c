@@ -1,8 +1,10 @@
 #include "scatter.h"
 #include "colours.h"
 #include "data.h"
+#include "data_draw.h"
 #include "math.h"
 #include "plane.h"
+#include "plane_draw.h"
 #include "plotarea.h"
 #include "raylib.h"
 

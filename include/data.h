@@ -36,11 +36,4 @@ Data load_data(const char *path, Plane plane, const char *label,
  * Data vinda de create_data (arrays do chamador) e para NULL. */
 void free_data(Data *data);
 
-void draw_line_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
-void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot);
-void draw_pie_data(Data *data, int data_count);
-void draw_label(Data *data, Plane *plane, PlotArea *plot);
-void draw_legend(Data *data, int data_count, PlotArea *plot);
-int data_size(Data *data);
-
 #endif

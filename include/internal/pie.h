@@ -4,7 +4,8 @@
 #include "data.h"
 #include "plotarea.h"
 
-void draw_pie_data(Data *data, int data_count);
+/* Monta um frame do gráfico de pizza na área indicada. Interno: o usuário
+ * chama plot_pie (matplotc.h). */
 void create_pie(Data *data, int data_count, PlotArea *plotarea);
 
 #endif
