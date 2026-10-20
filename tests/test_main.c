@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "context.h"
+#include "matplotc.h"
 #include "plane.h"
 
 int main(void) {
@@ -54,6 +55,17 @@ int main(void) {
   MT_CHECK_FLOAT(0.0f, plane.scale_y, 0.001f);
   plane = create_plane(0, 10, 1.0f, 0, 10, -1.0f, false);
   MT_CHECK_FLOAT(0.0f, plane.scale_y, 0.001f);
+
+  /* show() deve falhar cedo, sem abrir janela, quando não há janela ou
+   * nenhum gráfico registrado. ATENÇÃO: nunca chame um plot_* com
+   * argumentos válidos aqui, senão show() abriria uma janela de verdade. */
+  show(NULL);
+  show(&context);
+
+  plane = create_plane(0, 10, 1.0f, 0, 10, 1.0f, false);
+  plot_bar(&context, &plane, NULL, 1); /* dado inválido: não registra */
+  plot_histogram(NULL, &plane, NULL, 1);
+  show(&context); /* ainda sem gráfico registrado */
 
   return MT_END();
 }
