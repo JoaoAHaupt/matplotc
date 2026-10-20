@@ -13,25 +13,25 @@ PlotArea create_plotarea(Context *context) {
   area.padding_top = context->height * 0.05f;
   area.padding_bottom = context->height * 0.075f;
 
-  if (area.padding_left < 50)
-    area.padding_left = 50;
-  if (area.padding_left > 100)
-    area.padding_left = 100;
+  if (area.padding_left < 50.0f)
+    area.padding_left = 50.0f;
+  if (area.padding_left > 100.0f)
+    area.padding_left = 100.0f;
 
-  if (area.padding_right < 25)
-    area.padding_right = 25;
-  if (area.padding_right > 60)
-    area.padding_right = 60;
+  if (area.padding_right < 25.0f)
+    area.padding_right = 25.0f;
+  if (area.padding_right > 60.0f)
+    area.padding_right = 60.0f;
 
-  if (area.padding_top < 25)
-    area.padding_top = 25;
-  if (area.padding_top > 60)
-    area.padding_top = 60;
+  if (area.padding_top < 25.0f)
+    area.padding_top = 25.0f;
+  if (area.padding_top > 60.0f)
+    area.padding_top = 60.0f;
 
-  if (area.padding_bottom < 40)
-    area.padding_bottom = 40;
-  if (area.padding_bottom > 80)
-    area.padding_bottom = 80;
+  if (area.padding_bottom < 40.0f)
+    area.padding_bottom = 40.0f;
+  if (area.padding_bottom > 80.0f)
+    area.padding_bottom = 80.0f;
 
   area.left = area.padding_left;
   area.top = area.padding_top;

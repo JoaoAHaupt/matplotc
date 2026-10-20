@@ -99,17 +99,21 @@ void draw_linear_correlation(Data *data, int data_count, Plane *plane,
     double y1 = a * x1 + b;
     double y2 = a * x2 + b;
 
+    /* A regressão é calculada em double e convertida para float na hora de
+     * jogar na tela. */
     float screen_x1 =
-        plot->left + (x1 - plane->x_min_max[0]) / x_range * plot->width;
+        (float)(plot->left + (x1 - plane->x_min_max[0]) / x_range * plot->width);
 
     float screen_y1 =
-        plot->bottom - (y1 - plane->y_min_max[0]) / y_range * plot->height;
+        (float)(plot->bottom -
+                (y1 - plane->y_min_max[0]) / y_range * plot->height);
 
     float screen_x2 =
-        plot->left + (x2 - plane->x_min_max[0]) / x_range * plot->width;
+        (float)(plot->left + (x2 - plane->x_min_max[0]) / x_range * plot->width);
 
     float screen_y2 =
-        plot->bottom - (y2 - plane->y_min_max[0]) / y_range * plot->height;
+        (float)(plot->bottom -
+                (y2 - plane->y_min_max[0]) / y_range * plot->height);
 
     DrawLineEx((Vector2){screen_x1, screen_y1}, (Vector2){screen_x2, screen_y2},
                1.0f, COLOURS[j % COLOURS_COUNT]);

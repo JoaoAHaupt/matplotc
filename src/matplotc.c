@@ -63,7 +63,7 @@ void show(Context *context) {
     return;
   }
 
-  InitWindow(context->width, context->height, context->title);
+  InitWindow((int)context->width, (int)context->height, context->title);
   /* export_png liga FLAG_WINDOW_HIDDEN e a raylib mantém as flags entre
    * janelas; sem isto, um show() depois de export_png abriria uma janela
    * invisível que não pode ser fechada. */
@@ -102,7 +102,7 @@ bool export_png(Context *context, const char *filename) {
    * mas não precisa aparecer na tela. show() desfaz a flag, então
    * export_png e show podem ser chamados em qualquer ordem. */
   SetConfigFlags(FLAG_WINDOW_HIDDEN);
-  InitWindow(context->width, context->height, context->title);
+  InitWindow((int)context->width, (int)context->height, context->title);
   SetTargetFPS(60);
 
   PlotArea plot_area = create_plotarea(context);

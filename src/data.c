@@ -94,7 +94,7 @@ void draw_legend(Data *data, int data_count, PlotArea *plot) {
   float legend_y = plot->top + 10;
 
   for (int i = 0; i < data_count; i++) {
-    float y = legend_y + i * line_height;
+    float y = legend_y + (float)i * line_height;
 
     // Caixinha colorida
     DrawRectangle((int)legend_x, (int)y, (int)box_size, (int)box_size,

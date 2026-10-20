@@ -50,7 +50,7 @@ static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
     }
 
     for (int i = 0; i < data[j].size; i++) {
-      float y = legend_y + slice * line_height;
+      float y = legend_y + (float)slice * line_height;
 
       // Caixinha colorida com a cor da fatia
       DrawRectangle((int)legend_x, (int)y, (int)box_size, (int)box_size,

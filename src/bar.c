@@ -43,7 +43,7 @@ void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot) {
 
   float slot_w = (min_step / x_range) * plot->width;
   float group_w = slot_w * 0.8f;
-  float bar_w = group_w / data_count;
+  float bar_w = group_w / (float)data_count;
 
   float base_val = fminf(fmaxf(0.0f, y_min), y_max);
   float base_y = plot->bottom - (base_val - y_min) / y_range * plot->height;
@@ -67,7 +67,7 @@ void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot) {
       }
 
       float center_x = plot->left + (x - x_min) / x_range * plot->width;
-      float bar_x = center_x - group_w / 2.0f + j * bar_w;
+      float bar_x = center_x - group_w / 2.0f + (float)j * bar_w;
 
       float value_y = plot->bottom - (y - y_min) / y_range * plot->height;
       value_y = fminf(fmaxf(value_y, plot->top), plot->bottom);
