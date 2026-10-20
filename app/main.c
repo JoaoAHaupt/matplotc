@@ -10,11 +10,13 @@ int main(void) {
   printf("3. Dispersao\n");
   printf("4. Pizza\n");
   printf("5. Histograma\n");
+  printf("6. Barras com dados de examples/vendas.txt\n");
+  printf("7. Barras e exportar para grafico.png (sem janela)\n");
   printf("Opcao: ");
   scanf("%d", &graph);
 
-  if (graph < 1 || graph > 5) {
-    printf("Opcao invalida. Escolha um numero entre 1 e 5.\n");
+  if (graph < 1 || graph > 7) {
+    printf("Opcao invalida. Escolha um numero entre 1 e 7.\n");
     return 1;
   }
 
@@ -79,6 +81,32 @@ int main(void) {
 
     plot_pie(&window, &data, 1);
     show(&window);
+  } else if (graph == 6) {
+    Plane plane = create_plane(1, 6, 1.0f, 0, 100, 10.0f, false);
+    Data data = load_data("examples/vendas.txt", plane, "Vendas", "Mes",
+                          "Vendas");
+
+    if (data.size == 0) {
+      return 1;
+    }
+
+    plot_bar(&window, &plane, &data, 1);
+    show(&window);
+    free_data(&data);
+  } else if (graph == 7) {
+    Plane plane = create_plane(1, 6, 1.0f, 0, 100, 10.0f, false);
+    Data data = load_data("examples/vendas.txt", plane, "Vendas", "Mes",
+                          "Vendas");
+
+    if (data.size == 0) {
+      return 1;
+    }
+
+    plot_bar(&window, &plane, &data, 1);
+    if (export_png(&window, "grafico.png")) {
+      printf("Imagem salva em grafico.png\n");
+    }
+    free_data(&data);
   } else {
     Plane plane = create_plane(0, 100, 10.0, 0, 10, 1.0, false);
     float values[] = {12, 18, 22, 27, 31, 34, 38, 42, 45, 47, 51, 53,

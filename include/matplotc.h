@@ -14,4 +14,6 @@ void plot_histogram(Context *context, Plane *plane, Data *data, int data_count);
 
 void show(Context *context);
 
+bool export_png(Context *context, const char *filename);
+
 #endif
