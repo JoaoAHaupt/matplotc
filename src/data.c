@@ -35,10 +35,14 @@ void free_data(Data *data) {
     return;
   }
 
-  if (data->owns_memory) {
-    free(data->x);
-    free(data->y);
+  /* Só mexe nos arrays se eles foram alocados por load_data. Em Data vinda
+   * de create_data os arrays pertencem ao chamador e não devem ser tocados. */
+  if (!data->owns_memory) {
+    return;
   }
+
+  free(data->x);
+  free(data->y);
 
   data->x = NULL;
   data->y = NULL;
