@@ -57,7 +57,7 @@ void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot) {
     if (data[j].x == NULL || data[j].y == NULL || data[j].size <= 0) {
       continue;
     }
-    Color bar_color = COLOURS[j % 8];
+    Color bar_color = COLOURS[j % COLOURS_COUNT];
     for (int i = 0; i < data[j].size; i++) {
       float x = data[j].x[i];
       float y = data[j].y[i];

@@ -2,6 +2,7 @@
 #include "plane_draw.h"
 #include "plotarea.h"
 #include "raylib.h"
+#include <math.h>
 #include <stdio.h>
 
 static const int font_size = 15;
@@ -32,29 +33,49 @@ void draw_plane(Plane *plane, PlotArea *plot_area) {
                      (int)plot_area->width, (int)plot_area->height, BLACK);
 }
 
-/* Eixo X: marcadores embaixo, valores crescendo da esquerda para a direita. */
+/* Quantidade de intervalos de tamanho `scale` que cabem no plano. A folga
+ * relativa evita perder a última marca por erro de ponto flutuante (por
+ * exemplo, 1.0 / 0.1 = 9.9999...). */
+static int tick_count(float scale, float min_max[2]) {
+  float range = min_max[1] - min_max[0];
+  if (scale <= 0.0f || range <= 0.0f) {
+    return -1;
+  }
+  return (int)floorf(range / scale + 1e-4f);
+}
+
+/* Valor da i-ésima marca. Calculado a partir do mínimo (e não somando o passo
+ * a cada marca) para não acumular erro; valores praticamente nulos viram 0
+ * para não aparecer algo como "2.98023e-08" no rótulo. */
+static float tick_value(float scale, float min_max[2], int i) {
+  float value = min_max[0] + (float)i * scale;
+  if (fabsf(value) < scale * 1e-4f) {
+    value = 0.0f;
+  }
+  return value;
+}
+
+/* Eixo X: marcadores embaixo, valores crescendo da esquerda para a direita.
+ * Cada marca fica na posição proporcional ao seu valor, então a escala fica
+ * correta mesmo quando o intervalo não é múltiplo do passo. */
 void draw_axis_x(float scale, float min_max[2], bool lines,
                  PlotArea *plot_area) {
-  if (scale <= 0.0f) {
+  int number_of_scale = tick_count(scale, min_max);
+  if (number_of_scale < 0) {
     return;
   }
 
-  int number_of_scale = (int)((min_max[1] - min_max[0]) / scale);
-
-  if (number_of_scale <= 0) {
-    return;
-  }
-
-  float scale_pixel_x = plot_area->width / number_of_scale;
-  float value = min_max[0];
+  float range = min_max[1] - min_max[0];
 
   for (int i = 0; i <= number_of_scale; i++) {
-    float x = plot_area->left + i * scale_pixel_x;
+    float value = tick_value(scale, min_max, i);
+    float x = plot_area->left + (value - min_max[0]) / range * plot_area->width;
 
     DrawRectangle((int)(x - 1), (int)(plot_area->bottom - (float)tick_size / 2),
                   2, tick_size, BLACK);
 
-    if (lines && i > 0 && i < number_of_scale) {
+    /* Grade só no interior (as bordas já são desenhadas por draw_plane). */
+    if (lines && x > plot_area->left + 1.0f && x < plot_area->right - 1.0f) {
       DrawLine((int)x, (int)plot_area->top, (int)x, (int)plot_area->bottom,
                LIGHTGRAY);
     }
@@ -64,34 +85,28 @@ void draw_axis_x(float scale, float min_max[2], bool lines,
 
     DrawText(label, (int)(x - (float)text_width / 2),
              (int)(plot_area->bottom + 12), font_size, BLACK);
-
-    value += scale;
   }
 }
 
 /* Eixo Y: marcadores na esquerda, valores crescendo de baixo para cima. */
 void draw_axis_y(float scale, float min_max[2], bool lines,
                  PlotArea *plot_area) {
-  if (scale <= 0.0f) {
+  int number_of_scale = tick_count(scale, min_max);
+  if (number_of_scale < 0) {
     return;
   }
 
-  int number_of_scale = (int)((min_max[1] - min_max[0]) / scale);
-
-  if (number_of_scale <= 0) {
-    return;
-  }
-
-  float scale_pixel_y = plot_area->height / number_of_scale;
-  float value = min_max[0];
+  float range = min_max[1] - min_max[0];
 
   for (int i = 0; i <= number_of_scale; i++) {
-    float y = plot_area->bottom - i * scale_pixel_y;
+    float value = tick_value(scale, min_max, i);
+    float y =
+        plot_area->bottom - (value - min_max[0]) / range * plot_area->height;
 
     DrawRectangle((int)(plot_area->left - (float)tick_size / 2), (int)(y - 1),
                   tick_size, 2, BLACK);
 
-    if (lines && i > 0 && i < number_of_scale) {
+    if (lines && y > plot_area->top + 1.0f && y < plot_area->bottom - 1.0f) {
       DrawLine((int)plot_area->left, (int)y, (int)plot_area->right, (int)y,
                LIGHTGRAY);
     }
@@ -102,7 +117,5 @@ void draw_axis_y(float scale, float min_max[2], bool lines,
     DrawText(label,
              (int)(plot_area->left - (float)tick_size / 2 - 8 - text_width),
              (int)(y - (float)font_size / 2), font_size, BLACK);
-
-    value += scale;
   }
 }

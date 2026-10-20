@@ -1,0 +1,500 @@
+diff --git a/Makefile b/Makefile
+index 4bd38d1..e989540 100644
+--- a/Makefile
++++ b/Makefile
+@@ -84,16 +84,19 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+ 	$(CC) $(CFLAGS) -fPIC -c $< -o $@
+ 
+ # Aplicação cliente
++# Sem -MMD/-MP aqui: senão o .d do executável seria gerado dentro de bin/.
++APP_CFLAGS := $(filter-out -MMD -MP,$(CFLAGS))
++
+ app: $(APP_STATIC) $(APP_SHARED)
+ 
+ # Ligação estática
+ $(APP_STATIC): $(APP_SRC) $(STATIC_LIB) $(HEADERS) | $(BIN_DIR)
+-	$(CC) $(CFLAGS) $(LDFLAGS) $(APP_SRC) $(STATIC_LIB) -o $@ $(LDLIBS)
++	$(CC) $(APP_CFLAGS) $(LDFLAGS) $(APP_SRC) $(STATIC_LIB) -o $@ $(LDLIBS)
+ 
+ # Ligação dinâmica
+ # ($$ORIGIN/../lib permite rodar sem LD_LIBRARY_PATH e sem instalar)
+ $(APP_SHARED): $(APP_SRC) $(SHARED_LIB) $(HEADERS) | $(BIN_DIR)
+-	$(CC) $(CFLAGS) $(LDFLAGS) $(APP_SRC) -L$(LIB_DIR) -l$(LIB_NAME) \
++	$(CC) $(APP_CFLAGS) $(LDFLAGS) $(APP_SRC) -L$(LIB_DIR) -l$(LIB_NAME) \
+ 	    -Wl,-rpath,'$$ORIGIN/../lib' $(RUNTIME_RPATH) -o $@ $(LDLIBS)
+ 
+ run: $(APP_STATIC)
+diff --git a/app/main.c b/app/main.c
+index 030f5ae..ac8aa16 100644
+--- a/app/main.c
++++ b/app/main.c
+@@ -13,9 +13,8 @@ int main(void) {
+   printf("6. Barras com dados de examples/vendas.txt\n");
+   printf("7. Barras e exportar para grafico.png (sem janela)\n");
+   printf("Opcao: ");
+-  scanf("%d", &graph);
+ 
+-  if (graph < 1 || graph > 7) {
++  if (scanf("%d", &graph) != 1 || graph < 1 || graph > 7) {
+     printf("Opcao invalida. Escolha um numero entre 1 e 7.\n");
+     return 1;
+   }
+@@ -26,7 +25,9 @@ int main(void) {
+   }
+ 
+   if (graph == 1) {
+-    Plane plane = create_plane(1, 6, 1.0, 0, 100, 10.0, false);
++    /* Plano de 0 a 7: deixa meia barra de folga antes do mes 1 e depois do
++     * mes 6, para que as barras das pontas nao fiquem cortadas. */
++    Plane plane = create_plane(0, 7, 1.0, 0, 100, 10.0, false);
+     float x[] = {1, 2, 3, 4, 5, 6};
+     float y[] = {45, 52, 48, 65, 72, 80};
+ 
+@@ -82,7 +83,7 @@ int main(void) {
+     plot_pie(&window, &data, 1);
+     show(&window);
+   } else if (graph == 6) {
+-    Plane plane = create_plane(1, 6, 1.0f, 0, 100, 10.0f, false);
++    Plane plane = create_plane(0, 7, 1.0f, 0, 100, 10.0f, false);
+     Data data = load_data("examples/vendas.txt", plane, "Vendas", "Mes",
+                           "Vendas");
+ 
+@@ -94,7 +95,7 @@ int main(void) {
+     show(&window);
+     free_data(&data);
+   } else if (graph == 7) {
+-    Plane plane = create_plane(1, 6, 1.0f, 0, 100, 10.0f, false);
++    Plane plane = create_plane(0, 7, 1.0f, 0, 100, 10.0f, false);
+     Data data = load_data("examples/vendas.txt", plane, "Vendas", "Mes",
+                           "Vendas");
+ 
+diff --git a/src/bar.c b/src/bar.c
+index 33c926c..5427b91 100644
+--- a/src/bar.c
++++ b/src/bar.c
+@@ -57,7 +57,7 @@ void draw_bar_data(Data *data, int data_count, Plane *plane, PlotArea *plot) {
+     if (data[j].x == NULL || data[j].y == NULL || data[j].size <= 0) {
+       continue;
+     }
+-    Color bar_color = COLOURS[j % 8];
++    Color bar_color = COLOURS[j % COLOURS_COUNT];
+     for (int i = 0; i < data[j].size; i++) {
+       float x = data[j].x[i];
+       float y = data[j].y[i];
+diff --git a/src/data.c b/src/data.c
+index a2046f4..25f68f3 100644
+--- a/src/data.c
++++ b/src/data.c
+@@ -97,7 +97,7 @@ void draw_legend(Data *data, int data_count, PlotArea *plot) {
+ 
+     // Caixinha colorida
+     DrawRectangle((int)legend_x, (int)y, (int)box_size, (int)box_size,
+-                  COLOURS[i]);
++                  COLOURS[i % COLOURS_COUNT]);
+ 
+     // Nome da série
+     DrawTextEx(font, data[i].label,
+diff --git a/src/line.c b/src/line.c
+index 37a2f36..9a5a1e5 100644
+--- a/src/line.c
++++ b/src/line.c
+@@ -6,12 +6,16 @@
+ #include "plane_draw.h"
+ #include "plotarea.h"
+ #include "raylib.h"
++#include <stddef.h>
+ 
+ void draw_line_data(Data *data, int data_count, Plane *plane, PlotArea *plot) {
+   float x_range = plane->x_min_max[1] - plane->x_min_max[0];
+   float y_range = plane->y_min_max[1] - plane->y_min_max[0];
+ 
+   for (int j = 0; j < data_count; j++) {
++    if (data[j].x == NULL || data[j].y == NULL) {
++      continue;
++    }
+     for (int i = 1; i < data[j].size; i++) {
+       float point_x1 = plot->left + (data[j].x[i - 1] - plane->x_min_max[0]) /
+                                         x_range * plot->width;
+@@ -26,14 +30,24 @@ void draw_line_data(Data *data, int data_count, Plane *plane, PlotArea *plot) {
+                                           y_range * plot->height;
+ 
+       DrawLineEx((Vector2){point_x1, point_y1}, (Vector2){point_x2, point_y2},
+-                 3.0f, COLOURS[j]);
++                 3.0f, COLOURS[j % COLOURS_COUNT]);
+     }
+   }
+ }
+ 
+ void create_line(Plane *plane, Data *data, int data_count, PlotArea *plotarea) {
++  if (plane == NULL || data == NULL || plotarea == NULL || data_count <= 0) {
++    return;
++  }
+   draw_plane(plane, plotarea);
++
++  // Recorta o desenho na area do grafico: pontos fora do plano nao invadem
++  // as margens, os eixos nem a legenda.
++  BeginScissorMode((int)plotarea->left, (int)plotarea->top,
++                   (int)plotarea->width, (int)plotarea->height);
+   draw_line_data(data, data_count, plane, plotarea);
++  EndScissorMode();
++
+   draw_label(data, plane, plotarea);
+   draw_legend(data, data_count, plotarea);
+ }
+diff --git a/src/matplotc.c b/src/matplotc.c
+index 11f8736..854d7e9 100644
+--- a/src/matplotc.c
++++ b/src/matplotc.c
+@@ -64,6 +64,10 @@ void show(Context *context) {
+   }
+ 
+   InitWindow(context->width, context->height, context->title);
++  /* export_png liga FLAG_WINDOW_HIDDEN e a raylib mantém as flags entre
++   * janelas; sem isto, um show() depois de export_png abriria uma janela
++   * invisível que não pode ser fechada. */
++  ClearWindowState(FLAG_WINDOW_HIDDEN);
+   SetTargetFPS(60);
+ 
+   PlotArea plot_area = create_plotarea(context);
+@@ -95,8 +99,8 @@ bool export_png(Context *context, const char *filename) {
+   }
+ 
+   /* Janela oculta: a raylib precisa de um contexto gráfico para renderizar,
+-   * mas não precisa aparecer na tela. A flag só é aplicada na primeira
+-   * InitWindow do processo, então chame export_png antes de show(). */
++   * mas não precisa aparecer na tela. show() desfaz a flag, então
++   * export_png e show podem ser chamados em qualquer ordem. */
+   SetConfigFlags(FLAG_WINDOW_HIDDEN);
+   InitWindow(context->width, context->height, context->title);
+   SetTargetFPS(60);
+diff --git a/src/pie.c b/src/pie.c
+index 5dfd45d..ce704a7 100644
+--- a/src/pie.c
++++ b/src/pie.c
+@@ -4,6 +4,7 @@
+ #include "data_draw.h"
+ #include "plotarea.h"
+ #include "raylib.h"
++#include <stddef.h>
+ 
+ // Legenda do gráfico de pizza: uma entrada por fatia (e não por série),
+ // usando o valor de x como nome da categoria.
+@@ -36,7 +37,7 @@ static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
+ 
+       // Caixinha colorida com a cor da fatia
+       DrawRectangle((int)legend_x, (int)y, (int)box_size, (int)box_size,
+-                    COLOURS[i % COLOURS_COUNT]);
++                    COLOURS[slice % COLOURS_COUNT]);
+ 
+       // Nome da categoria (x) e o seu percentual
+       const char *label = TextFormat("%g (%.0f%%)", data[j].x[i],
+@@ -50,9 +51,27 @@ static void draw_pie_legend(Data *data, int data_count, PlotArea *plotarea) {
+   }
+ }
+ 
+-void draw_pie_data(Data *data, int data_count) {
++/* Espaço reservado à direita para a legenda, em pixels. */
++#define PIE_LEGEND_WIDTH 170.0f
++
++/* Centro e raio da pizza a partir da área do gráfico: ela ocupa o espaço à
++ * esquerda da legenda, centralizada, com uma folga nas bordas. */
++static void pie_geometry(PlotArea *plotarea, Vector2 *center, float *radius) {
++  float width = plotarea->width - PIE_LEGEND_WIDTH;
++  if (width < plotarea->width * 0.5f) {
++    width = plotarea->width * 0.5f;
++  }
++  float height = plotarea->height;
++
++  center->x = plotarea->left + width / 2.0f;
++  center->y = plotarea->top + height / 2.0f;
++  *radius = (width < height ? width : height) / 2.0f * 0.9f;
++}
++
++static void draw_pie_slices(Data *data, int data_count, Vector2 center,
++                            float radius) {
+   float total = 0;
+-  // soma ytudo
++  // soma todos os valores de y
+   for (int j = 0; j < data_count; j++) {
+     for (int i = 0; i < data[j].size; i++) {
+       total += data[j].y[i];
+@@ -63,21 +82,41 @@ void draw_pie_data(Data *data, int data_count) {
+     return;
+ 
+   float start_angle = 0;
++  int slice = 0;
+ 
+   for (int j = 0; j < data_count; j++) {
+     for (int i = 0; i < data[j].size; i++) {
+       // calcula o angulo
+       float angle = (data[j].y[i] / total) * 360.0f;
+ 
+-      DrawCircleSector((Vector2){400, 400}, 150, start_angle,
+-                       start_angle + angle, 32, COLOURS[i % COLOURS_COUNT]);
++      DrawCircleSector(center, radius, start_angle, start_angle + angle, 64,
++                       COLOURS[slice % COLOURS_COUNT]);
+ 
+       start_angle += angle;
++      slice++;
+     }
+   }
+ }
+ 
++void draw_pie_data(Data *data, int data_count) {
++  /* Sem área informada: usa a janela atual inteira. */
++  Context context = {.width = (float)GetScreenWidth(),
++                     .height = (float)GetScreenHeight(),
++                     .title = ""};
++  PlotArea plotarea = create_plotarea(&context);
++  Vector2 center;
++  float radius;
++  pie_geometry(&plotarea, &center, &radius);
++  draw_pie_slices(data, data_count, center, radius);
++}
++
+ void create_pie(Data *data, int data_count, PlotArea *plotarea) {
+-  draw_pie_data(data, data_count);
++  if (data == NULL || plotarea == NULL || data_count <= 0) {
++    return;
++  }
++  Vector2 center;
++  float radius;
++  pie_geometry(plotarea, &center, &radius);
++  draw_pie_slices(data, data_count, center, radius);
+   draw_pie_legend(data, data_count, plotarea);
+ }
+diff --git a/src/plane.c b/src/plane.c
+index a2feae7..b4c1a99 100644
+--- a/src/plane.c
++++ b/src/plane.c
+@@ -2,6 +2,7 @@
+ #include "plane_draw.h"
+ #include "plotarea.h"
+ #include "raylib.h"
++#include <math.h>
+ #include <stdio.h>
+ 
+ static const int font_size = 15;
+@@ -32,29 +33,49 @@ void draw_plane(Plane *plane, PlotArea *plot_area) {
+                      (int)plot_area->width, (int)plot_area->height, BLACK);
+ }
+ 
+-/* Eixo X: marcadores embaixo, valores crescendo da esquerda para a direita. */
+-void draw_axis_x(float scale, float min_max[2], bool lines,
+-                 PlotArea *plot_area) {
+-  if (scale <= 0.0f) {
+-    return;
++/* Quantidade de intervalos de tamanho `scale` que cabem no plano. A folga
++ * relativa evita perder a última marca por erro de ponto flutuante (por
++ * exemplo, 1.0 / 0.1 = 9.9999...). */
++static int tick_count(float scale, float min_max[2]) {
++  float range = min_max[1] - min_max[0];
++  if (scale <= 0.0f || range <= 0.0f) {
++    return -1;
+   }
++  return (int)floorf(range / scale + 1e-4f);
++}
+ 
+-  int number_of_scale = (int)((min_max[1] - min_max[0]) / scale);
++/* Valor da i-ésima marca. Calculado a partir do mínimo (e não somando o passo
++ * a cada marca) para não acumular erro; valores praticamente nulos viram 0
++ * para não aparecer algo como "2.98023e-08" no rótulo. */
++static float tick_value(float scale, float min_max[2], int i) {
++  float value = min_max[0] + (float)i * scale;
++  if (fabsf(value) < scale * 1e-4f) {
++    value = 0.0f;
++  }
++  return value;
++}
+ 
+-  if (number_of_scale <= 0) {
++/* Eixo X: marcadores embaixo, valores crescendo da esquerda para a direita.
++ * Cada marca fica na posição proporcional ao seu valor, então a escala fica
++ * correta mesmo quando o intervalo não é múltiplo do passo. */
++void draw_axis_x(float scale, float min_max[2], bool lines,
++                 PlotArea *plot_area) {
++  int number_of_scale = tick_count(scale, min_max);
++  if (number_of_scale < 0) {
+     return;
+   }
+ 
+-  float scale_pixel_x = plot_area->width / number_of_scale;
+-  float value = min_max[0];
++  float range = min_max[1] - min_max[0];
+ 
+   for (int i = 0; i <= number_of_scale; i++) {
+-    float x = plot_area->left + i * scale_pixel_x;
++    float value = tick_value(scale, min_max, i);
++    float x = plot_area->left + (value - min_max[0]) / range * plot_area->width;
+ 
+     DrawRectangle((int)(x - 1), (int)(plot_area->bottom - (float)tick_size / 2),
+                   2, tick_size, BLACK);
+ 
+-    if (lines && i > 0 && i < number_of_scale) {
++    /* Grade só no interior (as bordas já são desenhadas por draw_plane). */
++    if (lines && x > plot_area->left + 1.0f && x < plot_area->right - 1.0f) {
+       DrawLine((int)x, (int)plot_area->top, (int)x, (int)plot_area->bottom,
+                LIGHTGRAY);
+     }
+@@ -64,34 +85,28 @@ void draw_axis_x(float scale, float min_max[2], bool lines,
+ 
+     DrawText(label, (int)(x - (float)text_width / 2),
+              (int)(plot_area->bottom + 12), font_size, BLACK);
+-
+-    value += scale;
+   }
+ }
+ 
+ /* Eixo Y: marcadores na esquerda, valores crescendo de baixo para cima. */
+ void draw_axis_y(float scale, float min_max[2], bool lines,
+                  PlotArea *plot_area) {
+-  if (scale <= 0.0f) {
++  int number_of_scale = tick_count(scale, min_max);
++  if (number_of_scale < 0) {
+     return;
+   }
+ 
+-  int number_of_scale = (int)((min_max[1] - min_max[0]) / scale);
+-
+-  if (number_of_scale <= 0) {
+-    return;
+-  }
+-
+-  float scale_pixel_y = plot_area->height / number_of_scale;
+-  float value = min_max[0];
++  float range = min_max[1] - min_max[0];
+ 
+   for (int i = 0; i <= number_of_scale; i++) {
+-    float y = plot_area->bottom - i * scale_pixel_y;
++    float value = tick_value(scale, min_max, i);
++    float y =
++        plot_area->bottom - (value - min_max[0]) / range * plot_area->height;
+ 
+     DrawRectangle((int)(plot_area->left - (float)tick_size / 2), (int)(y - 1),
+                   tick_size, 2, BLACK);
+ 
+-    if (lines && i > 0 && i < number_of_scale) {
++    if (lines && y > plot_area->top + 1.0f && y < plot_area->bottom - 1.0f) {
+       DrawLine((int)plot_area->left, (int)y, (int)plot_area->right, (int)y,
+                LIGHTGRAY);
+     }
+@@ -102,7 +117,5 @@ void draw_axis_y(float scale, float min_max[2], bool lines,
+     DrawText(label,
+              (int)(plot_area->left - (float)tick_size / 2 - 8 - text_width),
+              (int)(y - (float)font_size / 2), font_size, BLACK);
+-
+-    value += scale;
+   }
+ }
+diff --git a/src/scatter.c b/src/scatter.c
+index fc0452d..602f71d 100644
+--- a/src/scatter.c
++++ b/src/scatter.c
+@@ -7,6 +7,7 @@
+ #include "plane_draw.h"
+ #include "plotarea.h"
+ #include "raylib.h"
++#include <stddef.h>
+ 
+ void draw_scatter_data(Data *data, int data_count, Plane *plane,
+                        PlotArea *plot) {
+@@ -14,6 +15,9 @@ void draw_scatter_data(Data *data, int data_count, Plane *plane,
+   float y_range = plane->y_min_max[1] - plane->y_min_max[0];
+ 
+   for (int j = 0; j < data_count; j++) {
++    if (data[j].x == NULL || data[j].y == NULL) {
++      continue;
++    }
+     for (int i = 0; i < data[j].size; i++) {
+       float point_x = plot->left + (data[j].x[i] - plane->x_min_max[0]) /
+                                        x_range * plot->width;
+@@ -21,18 +25,28 @@ void draw_scatter_data(Data *data, int data_count, Plane *plane,
+       float point_y = plot->bottom - (data[j].y[i] - plane->y_min_max[0]) /
+                                          y_range * plot->height;
+ 
+-      DrawCircle((int)point_x, (int)point_y, 5, COLOURS[j]);
++      DrawCircle((int)point_x, (int)point_y, 5, COLOURS[j % COLOURS_COUNT]);
+     }
+   }
+ }
+ 
+ void create_scatter(Plane *plane, Data *data, int data_count,
+                     PlotArea *plotarea, bool show_regression) {
++  if (plane == NULL || data == NULL || plotarea == NULL || data_count <= 0) {
++    return;
++  }
+   draw_plane(plane, plotarea);
++
++  // Recorta o desenho na area do grafico: pontos e a reta de regressao nao
++  // invadem as margens, os eixos nem a legenda.
++  BeginScissorMode((int)plotarea->left, (int)plotarea->top,
++                   (int)plotarea->width, (int)plotarea->height);
+   draw_scatter_data(data, data_count, plane, plotarea);
+   if (show_regression) {
+     draw_linear_correlation(data, data_count, plane, plotarea);
+   }
++  EndScissorMode();
++
+   draw_label(data, plane, plotarea);
+   draw_legend(data, data_count, plotarea);
+ }
+@@ -48,7 +62,7 @@ void draw_linear_correlation(Data *data, int data_count, Plane *plane,
+   for (int j = 0; j < data_count; j++) {
+     int n = data[j].size;
+ 
+-    if (n < 2)
++    if (data[j].x == NULL || data[j].y == NULL || n < 2)
+       continue;
+ 
+     double sum_x = 0;
+@@ -93,6 +107,6 @@ void draw_linear_correlation(Data *data, int data_count, Plane *plane,
+         plot->bottom - (y2 - plane->y_min_max[0]) / y_range * plot->height;
+ 
+     DrawLineEx((Vector2){screen_x1, screen_y1}, (Vector2){screen_x2, screen_y2},
+-               1.0f, COLOURS[j]);
++               1.0f, COLOURS[j % COLOURS_COUNT]);
+   }
+ }
+diff --git a/tests/test_export.c b/tests/test_export.c
+index 6d2f452..1d21823 100644
+--- a/tests/test_export.c
++++ b/tests/test_export.c
+@@ -46,6 +46,9 @@ int main(void) {
+     return MT_END();
+   }
+ 
++  /* Reporta a suíte anterior antes que MT_BEGIN zere os contadores. */
++  int falhas = MT_END();
++
+   MT_BEGIN("export_png: gera arquivo PNG");
+ 
+   Plane plane = create_plane(1, 3, 1.0f, 0, 100, 10.0f, false);
+@@ -58,5 +61,27 @@ int main(void) {
+   MT_CHECK(tamanho_arquivo(SAIDA) > 0);
+ 
+   remove(SAIDA);
+-  return MT_END();
++  falhas = MT_END() || falhas;
++
++  /* Mais séries do que cores na paleta (8): as cores devem se repetir em
++   * ciclo, sem ler fora do vetor COLOURS. */
++  MT_BEGIN("export_png: mais de 8 series");
++
++  Plane muitas = create_plane(0, 10, 1.0f, 0, 12, 1.0f, true);
++  float mx[] = {0, 10};
++  float my[10][2];
++  Data series[10];
++  for (int i = 0; i < 10; i++) {
++    my[i][0] = my[i][1] = (float)(i + 1);
++    series[i] = create_data(muitas, "serie", mx, "X", my[i], "Y", 2);
++  }
++
++  plot_line(&ctx, &muitas, series, 10);
++  MT_CHECK(export_png(&ctx, SAIDA));
++  plot_scatter(&ctx, &muitas, series, 10, true);
++  MT_CHECK(export_png(&ctx, SAIDA));
++  MT_CHECK(tamanho_arquivo(SAIDA) > 0);
++
++  remove(SAIDA);
++  return MT_END() || falhas;
+ }
