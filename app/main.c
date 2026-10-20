@@ -86,7 +86,7 @@ int main(void) {
     } else if (graph == 6) {
       Plane plane = create_plane(0, 7, 1.0f, 0, 100, 10.0f, false);
       Data data =
-          load_data("examples/vendas.txt", plane, "Vendas", "Mes", "Vendas");
+          load_data("app/vendas.txt", plane, "Vendas", "Mes", "Vendas");
 
       if (data.size == 0) {
         return 1;
