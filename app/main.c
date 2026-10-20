@@ -36,6 +36,7 @@ int main(void) {
     }
 
     plot_bar(&window, &plane, &data, 1);
+    show(&window);
   } else if (graph == 2) {
     Plane plane = create_plane(0, 100, 10.0, 0, 100, 10.0, true);
     float x[] = {5, 15, 25, 35, 45, 55, 65, 75, 85, 95};
@@ -48,6 +49,7 @@ int main(void) {
     }
 
     plot_line(&window, &plane, &data, 1);
+    show(&window);
   } else if (graph == 3) {
     Plane plane = create_plane(0, 100, 10.0, 0, 100, 10.0, true);
     float x1[] = {5, 15, 25, 35, 45, 55, 65, 75, 85, 95};
@@ -63,6 +65,7 @@ int main(void) {
     }
 
     plot_scatter(&window, &plane, data, 2, true);
+    show(&window);
   } else if (graph == 4) {
     Plane plane = create_plane(0, 4, 1.0, 0, 100, 10.0, false);
     float x[] = {1, 2, 3, 4};
@@ -75,6 +78,7 @@ int main(void) {
     }
 
     plot_pie(&window, &data, 1);
+    show(&window);
   } else {
     Plane plane = create_plane(0, 100, 10.0, 0, 10, 1.0, false);
     float values[] = {12, 18, 22, 27, 31, 34, 38, 42, 45, 47, 51, 53,
@@ -95,6 +99,7 @@ int main(void) {
     }
 
     plot_histogram(&window, &plane, &data, 1);
+    show(&window);
   }
 
   return 0;
