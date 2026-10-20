@@ -97,7 +97,7 @@ void draw_legend(Data *data, int data_count, PlotArea *plot) {
 
     // Caixinha colorida
     DrawRectangle((int)legend_x, (int)y, (int)box_size, (int)box_size,
-                  COLOURS[i]);
+                  COLOURS[i % COLOURS_COUNT]);
 
     // Nome da série
     DrawTextEx(font, data[i].label,

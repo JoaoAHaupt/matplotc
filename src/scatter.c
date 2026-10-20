@@ -7,6 +7,7 @@
 #include "plane_draw.h"
 #include "plotarea.h"
 #include "raylib.h"
+#include <stddef.h>
 
 void draw_scatter_data(Data *data, int data_count, Plane *plane,
                        PlotArea *plot) {
@@ -14,6 +15,9 @@ void draw_scatter_data(Data *data, int data_count, Plane *plane,
   float y_range = plane->y_min_max[1] - plane->y_min_max[0];
 
   for (int j = 0; j < data_count; j++) {
+    if (data[j].x == NULL || data[j].y == NULL) {
+      continue;
+    }
     for (int i = 0; i < data[j].size; i++) {
       float point_x = plot->left + (data[j].x[i] - plane->x_min_max[0]) /
                                        x_range * plot->width;
@@ -21,18 +25,28 @@ void draw_scatter_data(Data *data, int data_count, Plane *plane,
       float point_y = plot->bottom - (data[j].y[i] - plane->y_min_max[0]) /
                                          y_range * plot->height;
 
-      DrawCircle((int)point_x, (int)point_y, 5, COLOURS[j]);
+      DrawCircle((int)point_x, (int)point_y, 5, COLOURS[j % COLOURS_COUNT]);
     }
   }
 }
 
 void create_scatter(Plane *plane, Data *data, int data_count,
                     PlotArea *plotarea, bool show_regression) {
+  if (plane == NULL || data == NULL || plotarea == NULL || data_count <= 0) {
+    return;
+  }
   draw_plane(plane, plotarea);
+
+  // Recorta o desenho na area do grafico: pontos e a reta de regressao nao
+  // invadem as margens, os eixos nem a legenda.
+  BeginScissorMode((int)plotarea->left, (int)plotarea->top,
+                   (int)plotarea->width, (int)plotarea->height);
   draw_scatter_data(data, data_count, plane, plotarea);
   if (show_regression) {
     draw_linear_correlation(data, data_count, plane, plotarea);
   }
+  EndScissorMode();
+
   draw_label(data, plane, plotarea);
   draw_legend(data, data_count, plotarea);
 }
@@ -48,7 +62,7 @@ void draw_linear_correlation(Data *data, int data_count, Plane *plane,
   for (int j = 0; j < data_count; j++) {
     int n = data[j].size;
 
-    if (n < 2)
+    if (data[j].x == NULL || data[j].y == NULL || n < 2)
       continue;
 
     double sum_x = 0;
@@ -93,6 +107,6 @@ void draw_linear_correlation(Data *data, int data_count, Plane *plane,
         plot->bottom - (y2 - plane->y_min_max[0]) / y_range * plot->height;
 
     DrawLineEx((Vector2){screen_x1, screen_y1}, (Vector2){screen_x2, screen_y2},
-               1.0f, COLOURS[j]);
+               1.0f, COLOURS[j % COLOURS_COUNT]);
   }
 }

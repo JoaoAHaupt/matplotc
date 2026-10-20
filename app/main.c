@@ -13,9 +13,8 @@ int main(void) {
   printf("6. Barras com dados de examples/vendas.txt\n");
   printf("7. Barras e exportar para grafico.png (sem janela)\n");
   printf("Opcao: ");
-  scanf("%d", &graph);
 
-  if (graph < 1 || graph > 7) {
+  if (scanf("%d", &graph) != 1 || graph < 1 || graph > 7) {
     printf("Opcao invalida. Escolha um numero entre 1 e 7.\n");
     return 1;
   }
@@ -26,7 +25,9 @@ int main(void) {
   }
 
   if (graph == 1) {
-    Plane plane = create_plane(1, 6, 1.0, 0, 100, 10.0, false);
+    /* Plano de 0 a 7: deixa meia barra de folga antes do mes 1 e depois do
+     * mes 6, para que as barras das pontas nao fiquem cortadas. */
+    Plane plane = create_plane(0, 7, 1.0, 0, 100, 10.0, false);
     float x[] = {1, 2, 3, 4, 5, 6};
     float y[] = {45, 52, 48, 65, 72, 80};
 
@@ -82,7 +83,7 @@ int main(void) {
     plot_pie(&window, &data, 1);
     show(&window);
   } else if (graph == 6) {
-    Plane plane = create_plane(1, 6, 1.0f, 0, 100, 10.0f, false);
+    Plane plane = create_plane(0, 7, 1.0f, 0, 100, 10.0f, false);
     Data data = load_data("examples/vendas.txt", plane, "Vendas", "Mes",
                           "Vendas");
 
@@ -94,7 +95,7 @@ int main(void) {
     show(&window);
     free_data(&data);
   } else if (graph == 7) {
-    Plane plane = create_plane(1, 6, 1.0f, 0, 100, 10.0f, false);
+    Plane plane = create_plane(0, 7, 1.0f, 0, 100, 10.0f, false);
     Data data = load_data("examples/vendas.txt", plane, "Vendas", "Mes",
                           "Vendas");
 

@@ -84,16 +84,19 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 # Aplicação cliente
+# Sem -MMD/-MP aqui: senão o .d do executável seria gerado dentro de bin/.
+APP_CFLAGS := $(filter-out -MMD -MP,$(CFLAGS))
+
 app: $(APP_STATIC) $(APP_SHARED)
 
 # Ligação estática
 $(APP_STATIC): $(APP_SRC) $(STATIC_LIB) $(HEADERS) | $(BIN_DIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(APP_SRC) $(STATIC_LIB) -o $@ $(LDLIBS)
+	$(CC) $(APP_CFLAGS) $(LDFLAGS) $(APP_SRC) $(STATIC_LIB) -o $@ $(LDLIBS)
 
 # Ligação dinâmica
 # ($$ORIGIN/../lib permite rodar sem LD_LIBRARY_PATH e sem instalar)
 $(APP_SHARED): $(APP_SRC) $(SHARED_LIB) $(HEADERS) | $(BIN_DIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(APP_SRC) -L$(LIB_DIR) -l$(LIB_NAME) \
+	$(CC) $(APP_CFLAGS) $(LDFLAGS) $(APP_SRC) -L$(LIB_DIR) -l$(LIB_NAME) \
 	    -Wl,-rpath,'$$ORIGIN/../lib' $(RUNTIME_RPATH) -o $@ $(LDLIBS)
 
 run: $(APP_STATIC)

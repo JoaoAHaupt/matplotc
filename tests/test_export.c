@@ -46,6 +46,9 @@ int main(void) {
     return MT_END();
   }
 
+  /* Reporta a suíte anterior antes que MT_BEGIN zere os contadores. */
+  int falhas = MT_END();
+
   MT_BEGIN("export_png: gera arquivo PNG");
 
   Plane plane = create_plane(1, 3, 1.0f, 0, 100, 10.0f, false);
@@ -58,5 +61,27 @@ int main(void) {
   MT_CHECK(tamanho_arquivo(SAIDA) > 0);
 
   remove(SAIDA);
-  return MT_END();
+  falhas = MT_END() || falhas;
+
+  /* Mais séries do que cores na paleta (8): as cores devem se repetir em
+   * ciclo, sem ler fora do vetor COLOURS. */
+  MT_BEGIN("export_png: mais de 8 series");
+
+  Plane muitas = create_plane(0, 10, 1.0f, 0, 12, 1.0f, true);
+  float mx[] = {0, 10};
+  float my[10][2];
+  Data series[10];
+  for (int i = 0; i < 10; i++) {
+    my[i][0] = my[i][1] = (float)(i + 1);
+    series[i] = create_data(muitas, "serie", mx, "X", my[i], "Y", 2);
+  }
+
+  plot_line(&ctx, &muitas, series, 10);
+  MT_CHECK(export_png(&ctx, SAIDA));
+  plot_scatter(&ctx, &muitas, series, 10, true);
+  MT_CHECK(export_png(&ctx, SAIDA));
+  MT_CHECK(tamanho_arquivo(SAIDA) > 0);
+
+  remove(SAIDA);
+  return MT_END() || falhas;
 }
